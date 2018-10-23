@@ -1,0 +1,895 @@
+ 87KR    87BR B- DECAY                 1983RA21,1977NU04,1975TO0915NDS    201510
+ 87KR  H TYP=FUL$AUT=T.D. Johnson and W.D. Kulp(a)$CIT=NDS 129, 1 (2015)$       
+ 87KR2 H CUT=27-Jul-2015$                                                       
+ 87KR c  %|b{+-}n=2.60 {I4}                                                     
+ 87KR c  1983Ra21: thermal neutron fission of {+235}U, mass separated fission   
+ 87KR2c       products, GeLi detectors, |g singles spectrum and coincidences    
+ 87KR c  1977Nu04: thermal neutron fission of {+235}U, radiochemical            
+ 87KR2c       separation, measured delayed neutron and |g spectra               
+ 87KR c  1975To09: thermal neutron fission of {+235}U, mass-separated fission   
+ 87KR2c       products, GeLi and SiLi detectors, measured |g spectra and        
+ 87KR3c       |b|g coincidences                                                 
+ 87KR c  Other |g-ray spectrometry: 1966Wi03, 1970Lu06, 1971Er15,               
+ 87KR2c       and 1975Hu02.                                                     
+ 87KR cL E         From least-squares fit to |g energies.                       
+ 87KR cL J         From {+87}Kr Adopted Levels.  Arguments made are from        
+ 87KR2cL           logft values presented here and connecting |g                
+ 87KR3cL            transitions                                                 
+ 87KR cL           %n: calculated from |G(n) from Adopted Levels and |G(|g)     
+ 87KR2cL      estimated (by previous evaluator, 1991Si02) to be < 0.04 keV      
+ 87KR3cL      for levels with odd parity and < 0.2 keV for levels with even     
+ 87KR4cL      parity.                                                           
+ 87KR cB IB        From |g-ray intensity balances.                              
+ 87KR cB IB,LOGFT  As noted by 1983Ra21, for this complex decay scheme with     
+ 87KR2cB      many unplaced |g rays with I{-|g} > 0.1%, the computed            
+ 87KR3cB      intensities of the weak |b branches, for example, I{-|b} < 0.3%,  
+ 87KR4cB      may be unreliable.                                                
+ 87KR cG E         From 1983Ra21, unless indicated otherwise.                   
+ 87KR cG E         In addition to the transitions listed here, 1977Nu04         
+ 87KR2cG           report a transition at 5588.6 {I 10} with I|g=0.0154         
+ 87KR3cG           (normalized to data of 1983Ra21).  This transition           
+ 87KR4cG           is not seen by 1983Ra21.  A 5821 keV |g transition           
+ 87KR5cG           was reported in 1975To09.  This would be expected            
+ 87KR6cG           to have been seen in 1983Ra21 based on intenstity            
+ 87KR7cG           comparisons, and so is not included here.                    
+ 87KR cG RI        From 1983Ra21, unless otherwise noted.                       
+ 87KR2cG           Intensities per 100 {+87}Br decays.  1977Nu04 and            
+ 87KR4cG      1975To09 give values of I{-|g} for about 20 |g's based on very    
+ 87KR5cG      different assumptions of normalization for 1420 |g, but the       
+ 87KR6cG      relative I{-|g}'s are in good agreement.                          
+ 87KR cG E(B)$Value of 896 {I4} given by 1983Ra21 is a misprint (private        
+ 87KR2cG      communication from first author).                                 
+ 87KR cG RI(F)$Value of 0.063 {I2} given by 1983Ra21 is a misprint (private     
+ 87KR2cG      communication from first author to 1991Si02).                     
+ 87KR DG CC$FROM BrIcc v2.3a (30-Jun-2013) 2008Ki07, "Frozen Orbitals" appr.    
+ 87BR  P 0.0         5/2-              55.65 S   13             6818       3    
+ 87BR cP             Changed from 3/2- due to observations from high spin       
+ 87BR2cP             experiments.  See 2006Po09 for more details.               
+ 87KR  N 1.0                   1.0                                              
+ 87KR cN NR        1983Ra21 normalize I{-|g} to the absolute intensity          
+ 87KR2cN      of 22.0 {I15} |g's per 100 decays for the 1419 |g, as reported to 
+ 87KR3cN      them by P. Hoff, based on absolute |g and |b count rate           
+ 87KR4cN      measurements.  1975To09 give 12 {I2} and 1977Nu04 31.2 {I3} for   
+ 87KR5cN      the same intensity.  The latter value cannot be correct since     
+ 87KR6cN      it leads to a ground-state feeding of 123%.                       
+ 87KR PN                                                                     4  
+ 87KR  G 93.54      70.130    9                                                 
+ 87KR  G 121.42     70.036    4                                                 
+ 87KR  G 175.59    100.052    9                                                 
+ 87KR  G 190.29     70.078   10                                                 
+ 87KR  G 346.06     70.080    6                                                 
+ 87KR  G 380.14     70.15     1                                                 
+ 87KR  G 389.14    200.031    6                                                 
+ 87KR  G 447.61    150.10     2                                                 
+ 87KR  G 454.4      50.031   10                                                 
+ 87KR  G 493.39     70.100    9                                                 
+ 87KR  G 583.6      50.09     3                                                 
+ 87KR  G 600.44    150.086   10                                                 
+ 87KR  G 614.2      90.05     3                                                 
+ 87KR  G 685.9      70.038   20                                                 
+ 87KR  G 692.5      40.031    2                                                 
+ 87KR  G 719.46    100.060    7                                                 
+ 87KR  G 798.6      30.038   9                                                  
+ 87KR  G 834.8      40.17     7                                                 
+ 87KR  G 860.00    150.020    3                                                 
+ 87KR  G 878.3      50.028    9                                                 
+ 87KR  G 889.9      70.06     3                                                 
+ 87KR  G 907.86    200.066   10                                                 
+ 87KR  G 963.9      30.074   10                                                 
+ 87KR  G 987.8      30.048    2                                                 
+ 87KR  G 990.3      30.013    2                                                 
+ 87KR  G 998.6      30.042   10                                                 
+ 87KR  G 1009.2     30.048   10                                                 
+ 87KR  G 1017.7     30.10     2                                                 
+ 87KR  G 1041.77   100.076   10                                                 
+ 87KR  G 1060.69   150.089   10                                                 
+ 87KR  G 1064.75   150.075   10                                                 
+ 87KR  G 1113.05   200.044    9                                                 
+ 87KR  G 1120.19   150.072    9                                                 
+ 87KR  G 1139.7     40.044    9                                                 
+ 87KR  G 1186.27   100.13     2                                                 
+ 87KR  G 1198.1     30.064   10                                                 
+ 87KR  G 1220.7     40.038   10                                                 
+ 87KR  G 1225.58   150.091   20                                                 
+ 87KR  G 1255.1     50.11     3                                                 
+ 87KR  G 1276.4     40.045   10                                                 
+ 87KR  G 1298.6     50.058   20                                                 
+ 87KR  G 1366.4     40.062   20                                                 
+ 87KR  G 1436.2     40.021    5                                                 
+ 87KR  G 1464.95   150.16     3                                                 
+ 87KR  G 1471.68   150.44     5                                                 
+ 87KR  G 1488.39   100.015    9                                                 
+ 87KR  G 1496.80   200.061    7                                                 
+ 87KR  G 1551.7     20.061    7                                                 
+ 87KR  G 1554.58   150.11     1                                                 
+ 87KR  G 1561.0     40.0053  20                                                 
+ 87KR  G 1602.0     40.094   20                                                 
+ 87KR  G 1655.3     40.059   10                                                 
+ 87KR  G 1744.3     50.069   20                                                 
+ 87KR  G 1759.32   150.12     1                                                 
+ 87KR  G 1781.2     40.13     4                                                 
+ 87KR  G 1796.2     70.14     9                                                 
+ 87KR  G 1831.5     30.20     2                                                 
+ 87KR  G 1847.3     30.12     2                                                 
+ 87KR  G 1899.9     40.05     1                                                 
+ 87KR  G 1906.8     30.076   10                                                 
+ 87KR  G 1947.9     30.084   20                                                 
+ 87KR  G 1953.6     40.064   10                                                 
+ 87KR  G 2022.6     30.11     2                                                 
+ 87KR  G 2035.42   150.077    8                                                 
+ 87KR  G 2066.3     30.15     3                                                 
+ 87KR  G 2080.9     40.086   20                                                 
+ 87KR  G 2092.84   150.058    7                                                 
+ 87KR  G 2107.90   200.13     2                                                 
+ 87KR  G 2110.23   150.099   10                                                 
+ 87KR  G 2119.9     30.19     6                                                 
+ 87KR  G 2138.7     30.12     2                                                 
+ 87KR  G 2175.4     30.088   20                                                 
+ 87KR  G 2254.23   150.19     2                                                 
+ 87KR  G 2318.6     30.051   10                                                 
+ 87KR  G 2339.90   150.12     1                                                 
+ 87KR  G 2417.76   150.18     2                                                 
+ 87KR  G 2434.30   150.12     1                                                 
+ 87KR  G 2469.4     30.059    9                                                 
+ 87KR  G 2536.2     90.07     3                                                 
+ 87KR  G 2570.8     30.12     2                                                 
+ 87KR  G 2590.03   150.13     1                                                 
+ 87KR  G 2596.3     30.099   10                                                 
+ 87KR  G 2607.1     30.081   10                                                 
+ 87KR  G 2622.77   150.053    6                                                 
+ 87KR  G 2688.79   150.033   20                                                 
+ 87KR  G 2709.2     30.13     2                                                 
+ 87KR  G 2744.7     60.013    3                                                 
+ 87KR  G 2811.3     60.16     4                                                 
+ 87KR  G 2853.35   150.089    8                                                 
+ 87KR  G 2862.9     40.065   10                                                 
+ 87KR  G 2901.0     50.086   20                                                 
+ 87KR  G 2914.6     70.088   20                                                 
+ 87KR  G 2922.6     40.10     2                                                 
+ 87KR  G 2925.6     30.033    7                                                 
+ 87KR  G 2931.64   150.14     4                                                 
+ 87KR  G 2967.05   100.06     3                                                 
+ 87KR  G 2970.8     80.09     3                                                 
+ 87KR  G 3039.9     40.047   10                                                 
+ 87KR  G 3112.9     30.10     2                                                 
+ 87KR  G 3275.2     20.034    4                                                 
+ 87KR  G 3294.1     70.04     3                                                 
+ 87KR  G 3305.9     50.049   20                                                 
+ 87KR  G 3317.8     90.058   20                                                 
+ 87KR  G 3343.7     50.028    5                                                 
+ 87KR  G 3364.8     70.068   20                                                 
+ 87KR  G 3395.1     70.063   20                                             F   
+ 87KR  G 3458.6     30.074    9                                                 
+ 87KR  G 3536.8     60.077   20                                                 
+ 87KR  G 3559.5     60.016    5                                                 
+ 87KR  G 3611.9     40.097   10                                                 
+ 87KR  G 3645.97   200.082    8                                                 
+ 87KR  G 3683.2     80.057   10                                                 
+ 87KR  G 3693.2     50.067   10                                                 
+ 87KR  G 3738.2     50.074   20                                                 
+ 87KR  G 3781.5     70.10     3                                                 
+ 87KR  G 3829.0     80.038   10                                                 
+ 87KR  G 3874.0     80.085   20                                                 
+ 87KR  G 3930.2    100.11     5                                                 
+ 87KR  G 3970.0    100.059   20                                                 
+ 87KR  G 4012.3     30.0064   8                                                 
+ 87KR  G 4050.0     40.10     3                                                 
+ 87KR  G 4055.1     80.011    4                                                 
+ 87KR  G 4092.8     50.10     3                                                 
+ 87KR  G 4109.86   200.10     1                                                 
+ 87KR  G 4219.1     70.10     4                                                 
+ 87KR  G 4231.0     40.13     2                                                 
+ 87KR  G 4241.66   200.050    5                                                 
+ 87KR  G 4258.4     30.027    3                                                 
+ 87KR  G 4311.9    100.064   20                                                 
+ 87KR  G 4539.3    100.069   20                                                 
+ 87KR  G 4564.1     50.029    6                                                 
+ 87KR  G 4581.9    170.11     4                                                 
+ 87KR  G 4829.8     80.0038  10                                                 
+ 87KR  G 5049.4    220.016   10                                                 
+ 87KR  G 5166.6    160.016    9                                                 
+ 87KR  G 5318.4     90.024    9                                                 
+ 87KR  G 5362.5    120.024   10                                                 
+ 87KR  G 5395.3    100.024    6                                                 
+ 87KR  L        0    5/2+                                                       
+ 87KR  B                 9.0 19            7.39   7                             
+ 87KRS B EAV=3127 9                                                             
+ 87KR  L 531.99     41/2+                                                       
+ 87KR  B                 0.17 5            8.23  19                             
+ 87KRS B EAV=2870 98                                                            
+ 87KR  G 532.03    7 5.4      4                                              C  
+ 87KR  L 1419.67    3(7/2+)                                                     
+ 87KR  B                0.28 16            7.33  15                             
+ 87KRS B EAV=2441 9                                                             
+ 87KR  G 1419.71    722.0    15                                              C  
+ 87KR  L 1476.11    53/2+,5/2+                                                  
+ 87KR  B                 0.25 7            7.76  18                             
+ 87KRS B EAV=2414 9                                                             
+ 87KR  G 944.12     71.4      1                                              C  
+ 87KR  G 1476.06    77.9      6                                              C  
+ 87KR  L  1577.59  4 9/2+                                                       
+ 87KR  B                 0.13 5            7.91  20                             
+ 87KRS B EAV=2365 9                                                             
+ 87KR  G 1577.60    76.0      4                                              C  
+ 87KR  L 1841.41    5(9/2+)                                                     
+ 87KR  G 421.74    103.2      3                                              C  
+ 87KR  L  1881.20  6 3/2+,5/2+                                                  
+ 87KR  B                0.77 21            7.48   4                             
+ 87KRS B EAV=2218 9                                                             
+ 87KR  G 461.52     70.43     3                                              C  
+ 87KR  G 1349.19    70.45     3                                              C  
+ 87KR  G 1881.20   201.9      2                                              C  
+ 87KR  L  2005.42  4 3/2+,5/2+                                                  
+ 87KR  B                 0.22 5             8.0   4                             
+ 87KRS B EAV=2158 9                                                             
+ 87KR  G 529.60    151.3      2                                              C  
+ 87KR  G 2005.52    75.3      4                                              C  
+ 87KR  L 2071.66    5                                                           
+ 87KR  B                 0.28 3            7.42   6                             
+ 87KRS B EAV=2126 9                                                             
+ 87KR  G 230.33     90.54     4                                              C  
+ 87KR  G 651.96     71.10     8                                              C  
+ 87KR  G 2071.66    72.3      2                                              C  
+ 87KR  L   2086.7  6 (1/2+)                                                     
+ 87KR  B                 0.00 6            8.71  24                             
+ 87KRS B EAV=2119 9                                                             
+ 87KR  G 611.5      80.24     6                                              C  
+ 87KR  L 2105.37    9(11/2+)                                                    
+ 87KR  B               0.095 20            8.44   5                             
+ 87KRS B EAV=2110 9                                                             
+ 87KR  G 263.96     70.20     2                                              C  
+ 87KR  L  2122.53  6 3/2+,5/2+                                                  
+ 87KR  B                0.00 11            8.00  9                              
+ 87KRS B EAV=2101 9                                                             
+ 87KR  G 2122.62    91.20     9                                              C  
+ 87KR  L  2258.68  7 11/2-                                                      
+ 87KR  B                 0.10 5            8.07   6                             
+ 87KRS B EAV=2036 9                                                             
+ 87KR  G 681.22     80.38     3                                              C  
+ 87KR  G 2258.44   100.15     1 [E3]                                            
+ 87KR  L  2300.02  6 (1/2+)                                                     
+ 87KR  B                 0.19 5            7.83   4                             
+ 87KRS B EAV=2016 9                                                             
+ 87KR  G 824.0      30.12     2                                              C  
+ 87KR  G 1768.07    70.56     4                                              C  
+ 87KR  G 2299.93    80.31     2                                              C  
+ 87KR  L 2329.9     6                                                           
+ 87KR  B               0.010 20            8.95  18                             
+ 87KRS B EAV=2002 9                                                             
+ 87KR  G 853.8      60.05     2                                              C  
+ 87KR  L 2369.48    7                                                           
+ 87KR  B                 0.34 9            7.65   5                             
+ 87KRS B EAV=1982 9                                                             
+ 87KR  G 893.42     90.40     3                                              C  
+ 87KR  G 2369.39   100.56     8                                                 
+ 87KR  L  2372.35  6 (3/2+,5/2+)                                                
+ 87KR  B                0.72 13            7.30   3                             
+ 87KRS B EAV=1981 9                                                             
+ 87KR  G 896.0     4 0.13     3                                             BC  
+ 87KR  G 952.66    150.74     7                                              C  
+ 87KR  G 1840.10   150.38     4                                              C  
+ 87KR  G 2372.38    71.00     8                                              C  
+ 87KR  L  2451.91  5                                                            
+ 87KR  B                0.64 10            7.51   4                             
+ 87KRS B EAV=1943 9                                                             
+ 87KR  G 610.46     70.60     6                                              C  
+ 87KR  G 874.30     70.39     3                                              C  
+ 87KR  G 2451.88   100.67     5                                              C  
+ 87KR  L  2462.86  10                                                           
+ 87KR  B                 0.20 3            8.13   5                             
+ 87KRS B EAV=1937 9                                                             
+ 87KR  G 2462.82   100.29     3                                                 
+ 87KR  L  2498.59   5                                                           
+ 87KR  B                 0.46 7            7.46   3                             
+ 87KRS B EAV=1920 9                                                             
+ 87KR  G 617.5      30.12     4                                              C  
+ 87KR  G 920.98     70.52     4                                              C  
+ 87KR  G 1078.88    90.10     1                                              C  
+ 87KR  G 2498.58    70.57     4                                                 
+ 87KR  L 2513.74    9                                                           
+ 87KR  B               0.199 20            8.11   4                             
+ 87KRS B EAV=1913 9                                                             
+ 87KR  G 1037.63    70.29     2                                              C  
+ 87KR  L 2518.69    87/2+                                                       
+ 87KR  B                 0.30 7            9.4                               1U 
+ 87KRS B EAV=1910 9                                                             
+ 87KR  G 1099.88   100.099   10                                              C  
+ 87KR cG E$The transition is a poor fit and is not included in the least        
+ 87KR2cG square adjustment to fit the energy levels. That                       
+ 87KR3cG adjustment gives 1099.04 {i8}                                          
+ 87KR3 G FL=1419.67                                                             
+ 87KR  G 2519.0     41.30     9                                              C  
+ 87KR  L 2547.1     3                                                           
+ 87KR  B                 0.24 4            7.98   5                             
+ 87KRS B EAV=1897 9                                                             
+ 87KR  G 2547.1     30.38     4                                                 
+ 87KR  L   2565.9   6                                                           
+ 87KR  B                 0.19 4            8.34  11                             
+ 87KRS B EAV=1888 9                                                             
+ 87KR  G 1146.2     60.16     4                                                 
+ 87KR  L 2605.78   16                                                           
+ 87KR  B               0.085 10            8.62   6                             
+ 87KRS B EAV=1869 9                                                             
+ 87KR  G 724.57    150.082   10                                              C  
+ 87KR  L  2641.74   6                                                           
+ 87KR  B                 0.24 7            7.87   7                             
+ 87KRS B EAV=1851 9                                                             
+ 87KR  G 636.39     80.16     1                                              C  
+ 87KR  G 2641.67    80.59     5                                              C  
+ 87KR  L  2715.24  10                                                           
+ 87KR  B               0.150 20            8.20   5                             
+ 87KRS B EAV=1816 9                                                             
+ 87KR  G 2715.19   100.19     2                                                 
+ 87KR  L 2757.72    8                                                           
+ 87KR  B                 0.45 5            7.59   3                             
+ 87KRS B EAV=1796 9                                                             
+ 87KR  G 1338.03    70.74     5                                              C  
+ 87KR  L 2787.33   113/2+,5/2+                                                  
+ 87KR  B               0.050 20            8.24   6                             
+ 87KRS B EAV=1781 9                                                             
+ 87KR  G 1311.21   100.16     2                                              C  
+ 87KR  L  2821.06   6                                                           
+ 87KR  B                0.75 10            7.13   7                             
+ 87KRS B EAV=1755 58                                                            
+ 87KR  G 698.59     90.14     1                                              C  
+ 87KR  G 2820.97    71.8      1                                                 
+ 87KR  L   2832.1   6                                                           
+ 87KR  B               0.002 20            8.58  13                             
+ 87KRS B EAV=1760 9                                                             
+ 87KR  G 1356.0     60.07     2                                              C  
+ 87KR  L 2836.55    5(3/2,5/2)                                                  
+ 87KR  B                  3.6 3            6.68   3                             
+ 87KRS B EAV=1758 9                                                             
+ 87KR  G 714.09     70.19     1                                              C  
+ 87KR  G 831.26     71.30     9                                              C  
+ 87KR  G 1360.59   203.4      2                                              C  
+ 87KR  G 2836.36    71.4      1                                              C  
+ 87KR  L  2863.26  10                                                           
+ 87KR  B                 3.42 4            8.07  8                              
+ 87KRS B EAV=1745 9                                                             
+ 87KR  G 1285.66    90.22     4                                              C  
+ 87KR  L   3004.0   3                                                           
+ 87KR  B               0.523 11            8.48   7                             
+ 87KRS B EAV=1677 9                                                             
+ 87KR  G 3003.9     30.12     1                                              C  
+ 87KR  L  3020.81  16                                                           
+ 87KR  B               0.180 20            8.19   7                             
+ 87KRS B EAV=1669 9                                                             
+ 87KR  G 1443.21   150.14     2                                              C  
+ 87KR  L 3026.85    4                                                           
+ 87KR  B                3.70 19            6.61   2                             
+ 87KRS B EAV=1666 9                                                             
+ 87KR  G 955.1      30.36     7                                              C  
+ 87KR  G 1021.26    71.30     9                                              C  
+ 87KR  G 1449.24    71.10     8                                              C  
+ 87KR  G 1607.32    71.40     9                                              C  
+ 87KR  G 3026.77    71.30     9                                              C  
+ 87KR  L  3080.78  15                                                           
+ 87KR  B               0.465 20            8.07   6                             
+ 87KRS B EAV=1640 9                                                             
+ 87KR  G 3080.72   150.17     2                                                 
+ 87KR  L 3142.91   15                                                           
+ 87KR  B               1.550 10            8.07   3                             
+ 87KRS B EAV=1611 9                                                             
+ 87KR  G 3142.85   150.16     1                                                 
+ 87KR  L  3171.86  16                                                           
+ 87KR  B               0.715 20            8.11   7                             
+ 87KRS B EAV=1597 9                                                             
+ 87KR  G 1330.43   150.14     2                                              C  
+ 87KR  L 3217.87    5                                                           
+ 87KR  B                 1.03 8            7.12   3                             
+ 87KRS B EAV=1575 9                                                             
+ 87KR  G 1095.16   150.093   10                                              C  
+ 87KR  G 1146.3     60.15     4                                              C  
+ 87KR  G 1212.60    90.19     2                                              C  
+ 87KR  G 1376.08   150.10     1                                              C  
+ 87KR  G 1640.24   200.18     3                                             &   
+ 87KR  G 1798.31    70.60     4                                              C  
+ 87KR  G 3217.61   9 0.33    3                                                  
+ 87KR  L 3225.97   10                                                           
+ 87KR  B                 0.16 5            7.44   4                             
+ 87KRS B EAV=1571 9                                                             
+ 87KR  G 853.6      60.10     4                                              C  
+ 87KR  G 2693.94   100.41     3                                              C  
+ 87KR  G 3225.9     30.11     1                                                 
+ 87KR  L  3237.19  10                                                           
+ 87KR  B               0.071 20            7.90   5                             
+ 87KRS B EAV=1565 9                                                             
+ 87KR  G 1659.58    90.21     2                                              C  
+ 87KR  L 3256.64    6                                                           
+ 87KR  B                1.27 23            6.65   3                             
+ 87KRS B EAV=1556 9                                                             
+ 87KR  G 737.96     70.47     3                                              C  
+ 87KR  G 1415.43   151.5      2                                              C  
+ 87KR  G 1836.78    71.4      1                                              C  
+ 87KR3 G FL=1419.67                                                             
+ 87KR  G 3256.77   100.32     3                                                 
+ 87KR  L   3288.4   3                                                           
+ 87KR  B               0.120 20            8.08  7                              
+ 87KRS B EAV=1541 9                                                             
+ 87KR  G 1868.7     30.13     2                                              C  
+ 87KR  L  3297.13  21                                                           
+ 87KR  B               0.170 10            8.15   4                             
+ 87KRS B EAV=1537 9                                                             
+ 87KR  G 1291.7     20.11     1                                              C  
+ 87KR  L   3301.9   4                                                           
+ 87KR  B                1.37 11            7.33  7                              
+ 87KRS B EAV=1534 9                                                             
+ 87KR  G 1043.3     60.12     4                                              C  
+ 87KR  G 1882.2     40.60    10                                              C  
+ 87KR  L   3361.9   7                                                           
+ 87KR  B                 0.70 3            8.11  12                             
+ 87KRS B EAV=1506 9                                                             
+ 87KR  G 3361.8     70.11     3                                                 
+ 87KR  L 3434.75   11                                                           
+ 87KR  B                 0.93 3            7.53   4                             
+ 87KRS B EAV=1471 9                                                             
+ 87KR  G 1958.23   150.16     2                                              C  
+ 87KR  G 3435.07   150.23     2                                                 
+ 87KR  L   3444.9   3                                                          ?
+ 87KR cL E$a question mark in Table V of 1983Ra21 indicates that this           
+ 87KR2cL level may be considered tentative                                      
+ 87KR  B               0.250 20            8.11  9                              
+ 87KRS B EAV=1466 9                                                             
+ 87KR  G 3444.8     30.10     2                                              ?  
+ 87KR  L   3559.7   3                                                           
+ 87KR  B                0.150 4            8.37   4                             
+ 87KRS B EAV=1411 9                                                             
+ 87KR  G 555.72     70.047    4                                              C  
+ 87KR  L  3599.00  15                                                           
+ 87KR  B                0.118 9            7.98   4                             
+ 87KRS B EAV=1392 9                                                             
+ 87KR  G 3598.92   150.110    9                                                 
+ 87KR  L 3645.48    7 3/2,5/2,7/2                                               
+ 87KR  B                 0.88 6            7.06   4                             
+ 87KRS B EAV=1370 9                                                             
+ 87KR  G 1126.78   150.085   10                                                 
+ 87KR  G 1640.24   200.18     3                                             &   
+ 87KR  G 2169.30    70.55     4                                              C  
+ 87KR  G 2226.1    3 0.15     3                                              C  
+ 87KR  L   3657.3  10                                                           
+ 87KR  B                 0.12 3            7.99  13                             
+ 87KRS B EAV=1365 9                                                             
+ 87KR  G 3657.2    100.10     3                                                 
+ 87KR  L   3689.1   5                                                           
+ 87KR  B                 0.27 4            7.72  10                             
+ 87KRS B EAV=1350 9                                                             
+ 87KR  G 3689.0     50.18     4                                                 
+ 87KR  L   3777.4  6                                                            
+ 87KR  B                 0.24 5            7.74  15                             
+ 87KRS B EAV=1307 9                                                             
+ 87KR  G 940.8      60.15     5                                              C  
+ 87KR  L  3807.02  11                                                           
+ 87KR  B                 0.32 5            7.56  10                             
+ 87KRS B EAV=1293 9                                                             
+ 87KR  G 1965.58    90.22     5                                              C  
+ 87KR  L  3809.41  15                                                           
+ 87KR  B                 0.84 6            7.02   4                             
+ 87KRS B EAV=1292 9                                                             
+ 87KR  G 3809.32   150.76     6                                                 
+ 87KR  L 3874.18    8 3/2,5/2,7/2                                               
+ 87KR  B                 1.10 6            6.93   4                             
+ 87KRS B EAV=1261 9                                                             
+ 87KR  G 1355.1     60.10     3                                              C  
+ 87KR  G 2398.01    70.45     3                                              C  
+ 87KR  G 2454.70   200.30     3                                              C  
+ 87KR  L   3909.8   7                                                           
+ 87KR  B                 0.22 3            7.72  10                             
+ 87KRS B EAV=1245 9                                                             
+ 87KR  G 3909.7     70.13     3                                                 
+ 87KR  L  3917.16  10 3/2,5/2,7/2                                               
+ 87KR  B                1.48 11            6.54   3                             
+ 87KRS B EAV=1241 9                                                             
+ 87KR  G 3917.06   102.0      1                                              C  
+ 87KR  L   3923.0   6                                                           
+ 87KR  B                 0.36 4            7.75  15                             
+ 87KRS B EAV=1238 9                                                             
+ 87KR  G 2345.4    6 0.12    4                                               C  
+ 87KR  L   4027.2   5                                                           
+ 87KR  B               2.202 20            7.80  10                             
+ 87KRS B EAV=1189 9                                                             
+ 87KR  G 4027.1     50.092   20                                                 
+ 87KR  L 4136.3     4                                                           
+ 87KR  B                 1.45 8            7.27  14                             
+ 87KRS B EAV=1137 9                                                             
+ 87KR  G 4136.2     40.26     8                                                 
+ 87KR  L 4180.82    6 3/2(-),5/2,7/2                                            
+ 87KR  B                 2.71 3            5.99   3                             
+ 87KRS B EAV=1116 9                                                             
+ 87KR  G 1344.60   150.21     2                                              C  
+ 87KR  G 2603.20    80.41     3                                              C  
+ 87KR  G 4180.54   104.0      3                                                 
+ 87KR  L   4192.1  10                                                           
+ 87KR  B               0.130 20            7.76  12                             
+ 87KRS B EAV=1111 9                                                             
+ 87KR  G 4192.0    100.077   20                                                 
+ 87KR  L  4197.91  11                                                           
+ 87KR  B                 0.29 4            7.15  6                              
+ 87KRS B EAV=1108 9                                                             
+ 87KR  G 2192.46   100.31     4                                              C  
+ 87KR  L   4204.1  15                                                           
+ 87KR  B                 0.24 9            7.28  17                             
+ 87KRS B EAV=1105 9                                                             
+ 87KR  G 4204.0    150.23     9                                                 
+ 87KR  L   4223.4   3                                                           
+ 87KR  B                0.121 8            7.75  5                              
+ 87KRS B EAV=1096 9                                                             
+ 87KR  G 4223.3     30.076    8                                                 
+ 87KR  L  4226.34   9                                                           
+ 87KR  B                 0.34 3            7.58  12                             
+ 87KRS B EAV=1095 9                                                             
+ 87KR  G 1389.77    70.11     3                                              C  
+ 87KR  L   4265.1   6                                                           
+ 87KR  B               0.550 20            7.56  8                              
+ 87KRS B EAV=1077 9                                                             
+ 87KR  G 4265.0     60.11     2                                                 
+ 87KR  L  4297.29  15 3/2,5/2,7/2                                               
+ 87KR  B                 1.23 4            6.85  4                              
+ 87KRS B EAV=1061 9                                                             
+ 87KR  G 4297.18   150.53     4                                                 
+ 87KR  L 4327.22   10 3/2,5/2,7/2                                               
+ 87KR  B                 2.50 6            6.56  3                              
+ 87KRS B EAV=1047 9                                                             
+ 87KR  G 1685.58   150.19     2                                              C  
+ 87KR  G 2446.2     30.12     2                                              C  
+ 87KR  G 2907.46   150.40     4                                              C  
+ 87KR  G 4326.83   200.27     2                                                 
+ 87KR  L  4416.93  6  3/2(-),5/2,7/2                                            
+ 87KR  B                5.39 22            5.96  4                              
+ 87KRS B EAV=1005 9                                                             
+ 87KR  G 2345.3     40.37     6                                              C  
+ 87KR  G 2411.74   150.13     1                                              C  
+ 87KR  G 2575.37    90.58     5                                              C  
+ 87KR  G 2997.21    72.3      2                                              C  
+ 87KR  L  4524.15  15 3/2,5/2,7/2                                               
+ 87KR  B                 1.55 4            6.81  5                              
+ 87KRS B EAV=955 9                                                              
+ 87KR  G 3048.04   200.10     1                                              C  
+ 87KR  G 4523.96   200.29     3                                                 
+ 87KR  L  4548.29  20                                                           
+ 87KR  B                0.820 9            7.31  4                              
+ 87KRS B EAV=944 9                                                              
+ 87KR  G 4548.16   200.120    9                                                 
+ 87KR  L  4572.49  15 3/2,5/2,7/2                                               
+ 87KR  B                 1.35 6            6.42  4                              
+ 87KRS B EAV=932 9                                                              
+ 87KR  G 4572.36   150.88     6                                                 
+ 87KR  L  4595.52  6  3/2(-),5/2,7/2                                            
+ 87KR  B                2.03 12            5.98  3                              
+ 87KRS B EAV=922 9                                                              
+ 87KR  G 2143.40   150.25     3                                              C  
+ 87KR  G 2523.97   100.31     3                                              C  
+ 87KR  G 2754.3     40.24     3                                              C  
+ 87KR  G 3175.74    71.30     9                                              C  
+ 87KR  G 4596.4     60.22     6                                                 
+ 87KR  L  4620.90  20 3/2,5/2,7/2                                               
+ 87KR  B                 1.30 4            6.68  5                              
+ 87KRS B EAV=910 9                                                              
+ 87KR  G 4620.77   200.44     4                                                 
+ 87KR  L 4644.58   13 3/2(-),5/2,7/2                                            
+ 87KR  B                 1.35 7            6.34  4                              
+ 87KRS B EAV=899 9                                                              
+ 87KR  G 3066.85   150.13     1                                              C  
+ 87KR  G 4644.58   200.82     7                                                 
+ 87KR  L   4655.2   3                                                           
+ 87KR  B               0.460 10            7.19  4                              
+ 87KRS B EAV=894 9                                                              
+ 87KR  G 3235.5     30.13     1                                              C  
+ 87KR  L 4668.21    8 3/2(-),5/2,7/2                                            
+ 87KR  B                 0.75 7            6.4                                  
+ 87KRS B EAV=888 9                                                              
+ 87KR  G 2662.79   150.34     5                                              C  
+ 87KR  G 3090.8     60.09     3                                              C  
+ 87KR  G 3248.45    90.40     3                                              C  
+ 87KR  L  4710.35  6  5/2+,7/2                                                  
+ 87KR  B                3.61 14            5.75  3                              
+ 87KRS B EAV=868 9                                                              
+ 87KR  G 2638.7     40.43     7                                              C  
+ 87KR  G 2704.88    71.7      1                                              C  
+ 87KR  G 2828.79   200.20     2                                              C  
+ 87KR  G 2869.20   150.24     2                                              C  
+ 87KR  G 3132.64    90.25     2                                              C  
+ 87KR  G 4710.23   200.39     4                                                 
+ 87KR  L  4711.26  10 3/2,5/2,7/2                                               
+ 87KR  B                 0.79 3            6.72  5                              
+ 87KRS B EAV=868 9                                                              
+ 87KR  G 1493.38    80.34     3                                              C  
+ 87KR  L   4728.2  10                                                           
+ 87KR  B                0.13020            7.53  18                             
+ 87KRS B EAV=860 9                                                              
+ 87KR  G 4728.1    100.051   20                                                 
+ 87KR  L  4734.55  19 3/2,5/2,7/2                                               
+ 87KR  B                 0.73 4            6.69  6                              
+ 87KRS B EAV=857 9                                                              
+ 87KR  G 3314.6     60.11     3                                              C  
+ 87KR  G 4734.44   200.24     2                                                 
+ 87KR  L  4752.71  20 3/2,5/2,7/2                                               
+ 87KR  B                 0.72 3            6.71  5                              
+ 87KRS B EAV=849 9                                                              
+ 87KR  G 4752.57   200.32     3                                                 
+ 87KR  L  4784.46  14 3/2(-),5/2,7/2                                            
+ 87KR  B                3.59 10            5.92  3                              
+ 87KRS B EAV=834 9                                                              
+ 87KR  G 2943.0     30.077   10                                              C  
+ 87KR  G 4784.32   151.8      1                                                 
+ 87KR  L   4807.9   4 3/2,5/2,7/2                                               
+ 87KR  B               0.560 20            6.99  6                              
+ 87KRS B EAV=823 9                                                              
+ 87KR  G 4807.8     40.15     2                                                 
+ 87KR  L   4824.9   4 1/2,3/2,5/2                                               
+ 87KR  B               0.570 20            7.01  7                              
+ 87KRS B EAV=815 9                                                              
+ 87KR  G 4824.8     40.14     2                                                 
+ 87KR  L  4836.29  20 3/2,5/2,7/2                                               
+ 87KR  B               0.760 20            6.80  5                              
+ 87KRS B EAV=810 9                                                              
+ 87KR  G 4836.15   200.22     2                                                 
+ 87KR  L  4858.87  13  3/2(-),5/2,7/2                                           
+ 87KR  B                 1.18 5            6.35  4                              
+ 87KRS B EAV=799 9                                                              
+ 87KR  G 3017.39   150.27     2                                              C  
+ 87KR  G 3281.23   200.33     4                                              C  
+ 87KR  L  4872.05  15 3/2,5/2,7/2                                               
+ 87KR  B                 1.39 3            6.46  4                              
+ 87KRS B EAV=793 9                                                              
+ 87KR  G 4871.90   150.45     3                                                 
+ 87KR  L   4889.4  5                                                            
+ 87KR  B               0.489 20            7.18  11                             
+ 87KRS B EAV=785 9                                                              
+ 87KR  G 4889.3     50.082   20                                                 
+ 87KR  L   4917.7  11 3/2,5/2,7/2                                               
+ 87KR  B                 1.10 4            6.96  14                             
+ 87KRS B EAV=772 9                                                              
+ 87KR  G 4917.6    110.13     4                                                 
+ 87KR  L 4925.7     7 3/2,5/2,7/2                                               
+ 87KR  B                 0.85 4            6.81  10                             
+ 87KRS B EAV=769 9                                                              
+ 87KR  G 4925.6     70.18     4                                                 
+ 87KR  L  4961.56   7  3/2(-),5/2,7/2  50 NS     25                             
+ 87KR  B                4.30 13            5.53  3                              
+ 87KRS B EAV=752 9                                                              
+ 87KR  G 1044.3     60.06     2                                              C  
+ 87KR  G 1934.67    80.22     2                                              C  
+ 87KR  G 2509.63   200.17     2                                              C  
+ 87KR  G 2889.8     40.10     2                                              C  
+ 87KR  G 3383.3     70.15     6                                              C  
+ 87KR  G 3541.79   150.44     3                                              C  
+ 87KR  G 4961.54   152.0      1                                                 
+ 87KR  L  4962.43  21 3/2,5/2,7/2                                               
+ 87KR  B                 0.71 3            6.75  7                              
+ 87KRS B EAV=752 9                                                              
+ 87KR  G 2125.85   200.19     3                                              C  
+ 87KR  L   4976.1  9                                                            
+ 87KR  B               0.177 20            7.17  13                             
+ 87KRS B EAV=745 9                                                              
+ 87KR  G 4975.9     90.07     2                                                 
+ 87KR  L   5003.2  5                                                            
+ 87KR  B                0.165 4            7.26  4                              
+ 87KRS B EAV=733 9                                                              
+ 87KR  G 5003.0     50.054   10                                                 
+ 87KR  L   5021.7  3  3/2,5/2,7/2                                               
+ 87KR  B                 0.63 3            6.77  9                              
+ 87KRS B EAV=725 9                                                              
+ 87KR  G 5021.5     30.16     3                                                 
+ 87KR  L   5033.9  6                                                            
+ 87KR  B               0.180 10            7.30  10                             
+ 87KRS B EAV=719 9                                                              
+ 87KR  G 5033.7     60.046   10                                                 
+ 87KR  L   5044.7   3 3/2,5/2,7/2                                               
+ 87KR  B                 1.06 4            6.31  5                              
+ 87KRS B EAV=714 9                                                              
+ 87KR  G 5044.5     30.44     4                                                 
+ 87KR  L  5059.69  20 3/2,5/2,7/2                                               
+ 87KR  B                 0.97 3            6.49  5                              
+ 87KRS B EAV=707 9                                                              
+ 87KR  G 5059.53   200.28     3                                                 
+ 87KR  L   5065.9  3                                                            
+ 87KR  B                0.235 7            7.10  5                              
+ 87KRS B EAV=704 9                                                              
+ 87KR  G 4533.8     30.068    7                                              C  
+ 87KR  L 5076.19   17 3/2(-),5/2,7/2                                            
+ 87KR  B                 1.34 4            6.27  5                              
+ 87KRS B EAV=700 9                                                              
+ 87KR  G 3498.4     30.26     3                                              C  
+ 87KR  G 5076.08   200.19     2                                                 
+ 87KR  L   5088.9  4                                                            
+ 87KR  B               0.341 10            6.96  6                              
+ 87KRS B EAV=694 9                                                              
+ 87KR  G 5088.7     40.088   10                                                 
+ 87KR  L  5103.55  20 3/2,5/2,7/2                                               
+ 87KR  B                 1.45 4            6.26  5                              
+ 87KRS B EAV=687 9                                                              
+ 87KR  G 5103.39   200.43     4                                                 
+ 87KR  L  5120.39  20 3/2,5/2,7/2                                               
+ 87KR  B                 1.20 5            6.15  5                              
+ 87KRS B EAV=680 9                                                              
+ 87KR  G 5120.23   200.53     5                                                 
+ 87KR  L  5136.08  20 3/2,5/2,7/2                                               
+ 87KR  B                 0.97 2            6.66  6                              
+ 87KRS B EAV=672 9                                                              
+ 87KR  G 5135.92   200.16     2                                                 
+ 87KR  L   5155.1  6                                                            
+ 87KR  B                 0.22 1            7.24  11                             
+ 87KRS B EAV=664 9                                                              
+ 87KR  G 5154.9     60.04     1                                                 
+ 87KR  L   5183.4  3  3/2,5/2,7/2                                               
+ 87KR  B                 1.05 2            6.56  6                              
+ 87KRS B EAV=651 9                                                              
+ 87KR  G 5183.2     30.18     2                                                 
+ 87KR  L  5195.25  18 3/2,5/2,7/2(-)                                            
+ 87KR  B                 1.65 7            5.82  4                              
+ 87KRS B EAV=646 9                                                              
+ 87KR  G 4663.4     40.42     4                                              C  
+ 87KR  G 5195.02   200.53     5                                                 
+ 87KR  L  5201.21  18  3/2,5/2,7/2-                                             
+ 87KR  B                 1.56 6            5.87   4                             
+ 87KRS B EAV=643 9                                                              
+ 87KR  G 4669.9     40.28     4                                              C  
+ 87KR  G 5200.84   200.55     4                                                 
+ 87KR  L 5214.27   14 3/2-,5/2-,7/2-                                            
+ 87KR  B                 2.12 8            5.71   4                             
+ 87KRS B EAV=637 9                                                              
+ 87KR  G 3091.6     60.23     5                                              C  
+ 87KR  G 3794.46   150.74     6                                              C  
+ 87KR  G 5214.3     30.21     2                                                 
+ 87KR  L   5245.6  3  3/2,5/2,7/2                                               
+ 87KR  B                 1.05 2            6.49  6                              
+ 87KRS B EAV=623 9                                                              
+ 87KR  G 5245.4     30.18     2                                                 
+ 87KR  L 5280.72   14 3/2,5/2,7/2                                               
+ 87KR  B                 1.70 8            5.96  7                              
+ 87KRS B EAV=607 9                                                              
+ 87KR  G 2639.0     60.12     4                                              C  
+ 87KR  G 3804.6     30.17     6                                              C  
+ 87KR  G 3860.90   150.26     2                                              C  
+ 87KR  G 5281.5     90.011    4                                                 
+ 87KR  L 5302.56   21 3/2,5/2(+)                                                
+ 87KR  B                 1.76 3            6.27  6                              
+ 87KRS B EAV=597 8                                                              
+ 87KR  G 4770.43   200.26     3                                              C  
+ 87KR  L   5340.2  3  3/2,5/2,7/2                                               
+ 87KR  B                 1.55 2            6.49  7                              
+ 87KRS B EAV=580 8                                                              
+ 87KR  G 5340.0     30.14     2                                                 
+ 87KR  L   5370.1  3  3/2,5/2,7/2                                               
+ 87KR  B                 1.07 2            6.46  7                              
+ 87KRS B EAV=567 8                                                              
+ 87KR  G 5369.9     30.14     2                                                 
+ 87KR  L   5383.1  3  3/2,5/2,7/2                                               
+ 87KR  B                 1.00 2            6.41  7                              
+ 87KRS B EAV=561 8                                                              
+ 87KR  G 5382.9     30.15     2                                                 
+ 87KR  L  5406.34  20 3/2,5/2,7/2                                               
+ 87KR  B                 0.84 5            6.24  11                             
+ 87KRS B EAV=551 8                                                              
+ 87KR  G 5406.16   200.21     3                                                 
+ 87KR  L   5419.9  5                                                            
+ 87KR  B               0.265 15            6.87  14                             
+ 87KRS B EAV=545 8                                                              
+ 87KR  G 5419.7     50.047   15                                                 
+ 87KR  L   5424.2  9                                                            
+ 87KR  B               0.256 10            7.08  16                             
+ 87KRS B EAV=543 8                                                              
+ 87KR  G 5424.0     90.029   10                                                 
+ 87KR  L   5439.9  9                                                            
+ 87KR  B                0.235 3            7.52  14                             
+ 87KRS B EAV=536 8                                                              
+ 87KR  G 5439.7     90.010    3                                                 
+ 87KR  L   5454.9  3  3/2,5/2,7/2                                               
+ 87KR  B                 1.05 2            6.23  5                              
+ 87KRS B EAV=529 8                                                              
+ 87KR  G 5454.7     30.19     2                                                 
+ 87KR  L  5466.79  13  3/2,5/2,7/2(-)                                           
+ 87KR  B                 1.79 7            5.63  5                              
+ 87KRS B EAV=524 8                                                              
+ 87KR  G 3166.81   150.31     3                                              C  
+ 87KR  G 3381.0     80.13     6                                              C  
+ 87KR  G 3461.06   200.28     3                                              C  
+ 87KR  L 5473.74   20 3/2,5/2,7/2                                               
+ 87KR  B                 1.20 3            5.90  4                              
+ 87KRS B EAV=521 8                                                              
+ 87KR  G 5473.56   200.38     3                                                 
+ 87KR  L   5546.7  6       (5/2-)                                               
+ 87KR  B                0.552 5            6.87  7                              
+ 87KRS B EAV=489 8                                                              
+ 87KR  G 5546.5     60.033    5                                                 
+ 87KR  L   5561.9  9       5/2-                                                 
+ 87KR  B                0.635 7            7.03  14                             
+ 87KRS B EAV=482 8                                                              
+ 87KR  G 5561.7     90.022    7                                                 
+ 87KR  L   5594.7  3 (5/2-)                                                     
+ 87KR  B                0.552 5            6.54  5                              
+ 87KRS B EAV=468 8                                                              
+ 87KR  G 5594.5     30.061    5                                                 
+ 87KR  L   5606.4  5 3/2-                                                       
+ 87KR  B                0.355 6            6.62  6                              
+ 87KRS B EAV=463 8                                                              
+ 87KR  G 5606.2     50.049    6                                                 
+ 87KR  L   5635.2  5 (5/2-)                                                     
+ 87KR  B                0.314 5            6.67  6                              
+ 87KRS B EAV=450 8                                                              
+ 87KR  G 5635.0     50.040    5                                                 
+ 87KR  L   5648.8  9 (5/2-)                                                     
+ 87KR  B                0.222 2            7.47  15                             
+ 87KRS B EAV=444 8                                                              
+ 87KR  G 5648.6     90.006    2                                                 
+ 87KR  L   5659.9  4 (5/2-)                                                     
+ 87KR  B                0.257 3            6.80  6                              
+ 87KRS B EAV=439 8                                                              
+ 87KR  G 5659.7     40.027    3                                                 
+ 87KR  L   5672.3  4 (5/2-)                                                     
+ 87KR  B                0.254 4            6.63  6                              
+ 87KRS B EAV=434 8                                                              
+ 87KR  G 5672.1     40.039    4                                                 
+ 87KR  L   5685.6  3 (5/2-)                                                     
+ 87KR  B                 1.15 1            6.16  5                              
+ 87KRS B EAV=428 8                                                              
+ 87KR  G 5685.4     30.11     1                                                 
+ 87KR  L   5698.8  4 (5/2-)                                                     
+ 87KR  B                0.180 2            6.93  6                              
+ 87KRS B EAV=422 8                                                              
+ 87KR  G 5698.6     40.018    2                                                 
+ 87KR  L 5714.5     9(5/2-)                                                     
+ 87KR  B              0.1022 13            7.34  9                              
+ 87KRS B EAV=415 8                                                              
+ 87KR  G 5714.5     90.011    2                                                 
+ 87KR  L 5793.1     4(5/2-)                                                     
+ 87KR  B                0.400 9            6.21  7                              
+ 87KRS B EAV=382 8                                                              
+ 87KR  G 5793.1     40.015    2                                                 
+ 87KR  L 5850.1     4(5/2-)                                                     
+ 87KR  B                0.305 9            6.21  7                              
+ 87KRS B EAV=382 8                                                              
+ 87KR  G 5850.1     40.015    2                                                 
+ 87KR  L 5900.1     4(5/2-)                                                     
+ 87KR  B                0.285 9            6.21  7                              
+ 87KRS B EAV=382 8                                                              
+ 87KR  G 5900.1     40.015    2                                                 
+ 87KR  L 5950.1     4(5/2-)                                                     
+ 87KR  B                0.190 9            6.21  7                              
+ 87KRS B EAV=382 8                                                              
+ 87KR  G 5950.1     40.015    2                                                 
+ 87KR  L 6000.1     4(5/2-)                                                     
+ 87KR  B                0.085 9            6.21  7                              
+ 87KRS B EAV=382 8                                                              
+ 87KR  G 6000.1     40.015    2                                                 
+ 87KR  L 6050.1     4(5/2-)                                                     
+ 87KR  B                0.089 9            6.21  7                              
+ 87KRS B EAV=382 8                                                              
+ 87KR  G 6050.1     40.015    2                                                 
+ 87KR  L 6100.1     4(5/2-)                                                     
+ 87KR  B                0.051 9            6.21  7                              
+ 87KRS B EAV=382 8                                                              
+ 87KR  G 6100.1     40.015    2                                                 
+ 87KR  L 6150.1     4(5/2-)                                                     
+ 87KR  B                0.048 9            6.21  7                              
+ 87KRS B EAV=382 8                                                              
+ 87KR  G 6150.1     40.015    2                                                 
+ 87KR  L 6200.1     4(5/2-)                                                     
+ 87KR  B                0.040 9            6.21  7                              
+ 87KRS B EAV=382 8                                                              
+ 87KR  G 6200.1     40.015    2                                                 
+ 87KR  L 6250.1     4(5/2-)                                                     
+ 87KR  B                0.038 9            6.21  7                              
+ 87KRS B EAV=382 8                                                              
+ 87KR  G 6250.1     40.015    2                                                 
+ 87KR  L 6300.1     4(5/2-)                                                     
+ 87KR  B                0.038 9            6.21  7                              
+ 87KRS B EAV=382 8                                                              
+ 87KR  G 6300.1     40.015    2                                                 
+ 87KR  L 6350.1     4(5/2-)                                                     
+ 87KR  B                0.027 9            6.21  7                              
+ 87KRS B EAV=382 8                                                              
+ 87KR  G 6350.1     40.015    2                                                 
+ 87KR  L 6400.1     4(5/2-)                                                     
+ 87KR  B                0.030 9            6.21  7                              
+ 87KRS B EAV=382 8                                                              
+ 87KR  G 6400.1     40.015    2                                                 
+ 87KR  L 6450.1     4(5/2-)                                                     
+ 87KR  B                0.034 9            6.21  7                              
+ 87KRS B EAV=382 8                                                              
+ 87KR  G 6450.1     40.015    2                                                 
+ 87KR  L 6500.1     4(5/2-)                                                     
+ 87KR  B                0.034 9            6.21  7                              
+ 87KRS B EAV=382 8                                                              
+ 87KR  G 6500.1     40.015    2                                                 
