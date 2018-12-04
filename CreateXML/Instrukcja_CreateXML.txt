@@ -1,0 +1,16 @@
+Data sporządzenia: 2018-10-26
+Autor: Michał Stepaniuk
+
+Instrukcja do programu CreateXML, który przetwarza pliki z formatu ENSDF na wejściowe pliki XML programu MTASSimulation.
+
+Instalacja:
+Odbywa się za pomocą metody 'make' na podstawie istniejącego pliku Makefile. Aby odbyła się bez problemów należy zachować odpowiednią strukturę plików, tj. folder 'src' z plikami źródłowymi, folder 'include' z plikami nagłówkowymi, plik 'CreateXML.cc' oraz 'Makefile'.
+
+Użytkowanie:
+1. Program przystosowany jest do przetwarzania plików ENSDF zawierających informacje o rozpadzie beta- wraz z emisją neutronów opóźnionych.
+2. Jako dane wejściowe podawane powinny być pliki w formacie ENSDF przy uruchomieniu programu. Jeden podany plik wejściowy zawierający dane o rozpadzie powoduje utworzenie dwóch plików XML (rozpad nuklidu matka do nuklidu córka). Dwa pliki wejściowe, z czego drugi powinien zawierać informacje o neutronach opóźnionych w formacie ENSDF, tworzą trzy pliki XML (matka -> córka -> córka córki). Przykładowe polecenie do uruchomienia programu: './CreateXML Isotope.ens Neutrons.ens'.
+3. Pojedynczy plik XML zawiera dane potrzebne do symulacji odpowiadające jednemu nuklidowi.
+4. Ze względu na format plików neutronowych ENSDF, procent emitowanych neutronów w danym rozpadzie (Pn) oraz energia separacji neutronów (Sn) podawana jest bezpośrednio w kodzie 'CreateXML.cc' jako zmienne globalne. Aby je zmienić należy edytować kod 'CreateXML.cc' i ponownie skompilować program. Wielkości te nie wpływają na działanie programu przy używaniu jednego pliku wejściowego.
+5. Utworzone pliki posiadają nazwy '<liczba masowa><nazwa pierwiastka>.xml', np. '87BR.xml'.
+6. Tworzony jest również plik 'Decay.xml'wymagany przez MTASSimulation i zawierający informacje o domyślnych poziomach początkowym i końcowym symulacji.
+7. Podczas przetwarzania danych z formatu ENSDF, intensywności przejść beta normalizowane są do 100 z uwzględnieniem przejść beta do poziomów neutronowych. W wyniku działania CreateXML tworzony jest plik '<nazwa pierwszego pliku wejściowego>_summary' (np. 'Isotope.ens_summary'), który zawiera sprawdzenie i podsumowanie przetwarzanych danych, w szczególności wyliczany jest procent intensywności przejść beta-gamma dla energii powyżej Sn.

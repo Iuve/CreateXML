@@ -21,7 +21,7 @@ void ZeroT12(double* T12)
 }
 
 void CreateDefaultDecayXML(string defaultXmlFilename, string xmlMFilename, string xmlDFilename,
-	int atomicMassM, int atomicNumberM, int atomicNumberD, int atomicNumberDN = 0, string xmlDNFilename = 0L)
+	int atomicMassM, int atomicNumberM, int atomicNumberD, int atomicNumberDN = 0, string xmlDNFilename = "_")
 {
 	ofstream outDefaultXML(defaultXmlFilename.c_str());
 	if (!outDefaultXML.is_open())
@@ -61,6 +61,7 @@ int main(int argc,char** argv){
 	string ensDecayFilename, ensNeutronFilename;
 	//string additionalFilename = "someInformation.txt";
 	string xmlDNFilename;
+	bool ifNeutronsInDecay = false;
 	
 	if(argc == 2)
 	{
@@ -70,7 +71,7 @@ int main(int argc,char** argv){
 	{
 		ensDecayFilename = argv[1];
 		ensNeutronFilename = argv[2];
-		#define NEUTRON
+		ifNeutronsInDecay = true;
 	}
 	else
 	{
@@ -87,7 +88,8 @@ int main(int argc,char** argv){
 	if (!inDecay.is_open())
 //		throw IOException("Warning message: The file " + (string) ensDecayFilename + " is not open!");
 		cout << "Warning message (first): The file " + (string) ensDecayFilename + " is not open!" << endl;
-		string decayInfoSummaryFilename = ensDecayFilename + "_summary";
+	
+	string decayInfoSummaryFilename = ensDecayFilename + "_summary";
 		
 	ofstream outSummary(decayInfoSummaryFilename.c_str());
 	if (!outSummary.is_open())
@@ -120,6 +122,9 @@ int main(int argc,char** argv){
 	pugi::xml_node nodeLevelM;
 	pugi::xml_node nodeLevelD;
 	
+	vector<double> gammaIntensitiesFromLevels;
+	bool unlockGamma(false);
+	
 	while (!inDecay.eof())
 	{
 		getline(inDecay, buff);
@@ -130,16 +135,28 @@ int main(int argc,char** argv){
 		{	
 			if(buff[7]=='B' && buff[5]==' ' && buff[6]==' ')
 			{
-				whichBeta = -1;
-				
 				data = buff.substr(21, 8);
 				double betaIntensity = string2num <double>(data, std::dec);
 				totalBetaIntensity += betaIntensity;
 			}
+			if(buff[7]=='L' && buff[5]==' ' && buff[6]==' ') //each level
+			{				
+				unlockGamma = true;
+				gammaIntensitiesFromLevels.push_back(0.);
+			}
+			if(buff[7]=='G' && buff[5]==' ' && buff[6]==' ' && unlockGamma)
+			{
+				data = buff.substr(21, 8);
+				double gammaIntensity = string2num <double>(data, std::dec);
+				if(gammaIntensity > 0)
+					gammaIntensitiesFromLevels.back() += gammaIntensity;
+				else
+					gammaIntensitiesFromLevels.back() += 1;
+			}
 		}
 	}
 	inDecay.close();
-	//cout << "First end of " + (string) ensDecayFilename + " file." << endl;
+//	cout << "First end of " + (string) ensDecayFilename + " file." << endl;
 	inDecay.clear();
 	inDecay.open(ensDecayFilename.c_str());
 	if (!inDecay.is_open())
@@ -148,6 +165,9 @@ int main(int argc,char** argv){
 		
 	getline(inDecay, buff); //first line - some information about decay
 	getline(inDecay, buff);
+	
+	int gammaIntensityPointer(-1);
+	unlockGamma = false;
 	
 	while (!inDecay.eof())
 	{
@@ -191,7 +211,10 @@ int main(int argc,char** argv){
 			}
 			
 			if(buff[7]=='L' && buff[5]==' ' && buff[6]==' ') //each level
-			{				
+			{	
+				gammaIntensityPointer++;
+				unlockGamma = true;
+				
 				data = buff.substr(9, 10);
 				energyLevel = string2num <double>(data, std::dec);
 				
@@ -227,9 +250,9 @@ int main(int argc,char** argv){
 				double betaIntensity = string2num <double>(data, std::dec);
 				betaIntensity *= 100. / totalBetaIntensity;
 				normalizedTotalBetaIntensity += betaIntensity; //just to check if it is 100 at the end
-				#ifdef NEUTRON
+				
+				if(ifNeutronsInDecay)
 					betaIntensity *= (1. - g_delayedNeutronPercentage);
-				#endif	
 				
 				data = buff.substr(29,2);
 				double intensityError;
@@ -298,7 +321,7 @@ int main(int argc,char** argv){
 				}
 			}	*/
 			
-				if(buff[7]=='G' && buff[5]==' ' && buff[6]==' ')
+				if(buff[7]=='G' && buff[5]==' ' && buff[6]==' ' && unlockGamma)
 				{
 					data = buff.substr(9, 10);
 					double gammaEnergy = string2num <double>(data, std::dec);
@@ -307,6 +330,13 @@ int main(int argc,char** argv){
 					data = buff.substr(29, 2);
 					data = buff.substr(55, 7);
 					double electronConversionCoefficient = string2num <double>(data, std::dec);
+					
+					if(gammaIntensity > 0)
+					{
+						gammaIntensity *= 100. / gammaIntensitiesFromLevels.at(gammaIntensityPointer);
+					}
+					else
+						gammaIntensity = 100. / gammaIntensitiesFromLevels.at(gammaIntensityPointer);
 
 					pugi::xml_node nodeTransition = nodeLevelD.append_child("Transition");
 					nodeTransition.append_attribute("Type") = "G";
@@ -373,7 +403,7 @@ int main(int argc,char** argv){
 		atomicNameMother = PeriodicTable::GetAtomicNameCap(atomicNumber - 1);
 	}
 					
-	#ifdef NEUTRON
+	if(ifNeutronsInDecay){
 		int atomicNumberN(0), atomicMassN(0); //neutrons emmiter
 		
 		ifstream inNeutron(ensNeutronFilename.c_str());
@@ -527,7 +557,7 @@ int main(int argc,char** argv){
 		std::cout << "Saving result: " << docDaughterNeutron.save_file(xmlDNFilename.c_str()) << std::endl;
 		
 		outSummary << "normalizedTotalNeutronIntensity: " << normalizedTotalNeutronIntensity << endl;
-	#endif
+	}
 	
 	string xmlDFilename = num2string(atomicMassDaughter) + atomicNameDaughter + ".xml";
 	std::cout << "Saving result: " << docDaughter.save_file(xmlDFilename.c_str()) << std::endl;
@@ -535,8 +565,12 @@ int main(int argc,char** argv){
 	std::cout << "Saving result: " << docMother.save_file(xmlMFilename.c_str()) << std::endl;
 	
 	string defaultXmlFilename = "Decay.xml";
-	CreateDefaultDecayXML(defaultXmlFilename, xmlMFilename, xmlDFilename, atomicMassDaughter, 
-	atomicNumber, atomicNumber + whichBeta, atomicNumber + whichBeta, xmlDNFilename);
+	if(ifNeutronsInDecay)
+		CreateDefaultDecayXML(defaultXmlFilename, xmlMFilename, xmlDFilename, atomicMassDaughter, 
+		atomicNumber + whichBeta, atomicNumber, atomicNumber, xmlDNFilename);
+	else
+		CreateDefaultDecayXML(defaultXmlFilename, xmlMFilename, xmlDFilename, atomicMassDaughter, 
+		atomicNumber + whichBeta, atomicNumber);
 	
 	outSummary << endl << "beta-gamma intensity smaller than Sn: " << betaIntensityUnderSn << endl;
 	outSummary << "beta-gamma intensity bigger than Sn: " << betaIntensityAboveSn << endl;
