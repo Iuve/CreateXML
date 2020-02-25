@@ -1,6 +1,7 @@
 #include "pugixml.hpp"
 #include "MyTemplates.hh"
 #include "PeriodicTable.hh"
+#include "FermiDistribution.hh"
 
 #include <iostream>
 #include <vector>
@@ -9,10 +10,26 @@
 #include <cmath>
 #include <iomanip>
 
-const double g_delayedNeutronPercentage(2.6 / 100.);
+const double g_delayedNeutronPercentage(2.8 / 100.);
 const double g_SnEnergy = 5515.;
 
 using namespace std;
+
+string toStringPrecision(double input,int n)
+{
+    stringstream stream;
+    stream << fixed << setprecision(n) << input;
+    return stream.str();
+}
+
+string RemoveExtension(string fileName)
+{
+	while(fileName.back() != '.')
+		fileName.pop_back();
+	fileName.pop_back();	
+	
+	return fileName;
+}
 
 void ZeroT12(double* T12)
 {
@@ -34,7 +51,9 @@ void CreateDefaultDecayXML(string defaultXmlFilename, string xmlMFilename, strin
 		outDefaultXML << "<NuclideFile FileName=\"" + xmlMFilename + "\"/>" << endl;
 		outDefaultXML << "<NuclideFile FileName=\"" + xmlDFilename + "\"/>" << endl;
 		outDefaultXML << "<StartLevel AtomicNumber=\"" << atomicNumberM << "\" AtomicMass=\"" << atomicMassM << "\" Energy=\"0.0\"/>" << endl;
-		outDefaultXML << "<StopLevel AtomicNumber=\"" << atomicNumberD << "\" AtomicMass=\"" << atomicMassM << "\" Energy=\"0.0\"/>" ;
+		outDefaultXML << "<StopLevel AtomicNumber=\"" << atomicNumberD << "\" AtomicMass=\"" << atomicMassM << "\" Energy=\"0.0\"/>" << endl;
+		outDefaultXML << "<EventLength Value=\"0.5\" TimeUnit=\"US\"/>" << endl;
+		outDefaultXML << "<CycleLength Value=\"15\" TimeUnit=\"M\"/>" ;
 	}
 	else{
 		outDefaultXML << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << endl;
@@ -43,7 +62,9 @@ void CreateDefaultDecayXML(string defaultXmlFilename, string xmlMFilename, strin
 		outDefaultXML << "<NuclideFile FileName=\"" + xmlDFilename + "\"/>" << endl;
 		outDefaultXML << "<NuclideFile FileName=\"" + xmlDNFilename + "\"/>" << endl;
 		outDefaultXML << "<StartLevel AtomicNumber=\"" << atomicNumberM << "\" AtomicMass=\"" << atomicMassM << "\" Energy=\"0.0\"/>" << endl;
-		outDefaultXML << "<StopLevel AtomicNumber=\"" << atomicNumberDN << "\" AtomicMass=\"" << atomicMassM - 1 << "\" Energy=\"0.0\"/>" ;
+		outDefaultXML << "<StopLevel AtomicNumber=\"" << atomicNumberDN << "\" AtomicMass=\"" << atomicMassM - 1 << "\" Energy=\"0.0\"/>" << endl;
+		outDefaultXML << "<EventLength Value=\"0.5\" TimeUnit=\"US\"/>" << endl;
+		outDefaultXML << "<CycleLength Value=\"15\" TimeUnit=\"M\"/>" ;
 	}
 	
 	outDefaultXML.close();
@@ -57,9 +78,10 @@ int main(int argc,char** argv){
 	double maxBetaEnergy, energyLevel;
 	double totalBetaIntensity(0.), betaIntensityUnderSn(0.), betaIntensityAboveSn(0.);
 	double normalizedTotalBetaIntensity(0.);
+	double averageGammaEnergy(0.), averageBetaEnergy(0.);
+	double betaIntensity(0.);
 	string atomicName;
 	string ensDecayFilename, ensNeutronFilename;
-	//string additionalFilename = "someInformation.txt";
 	string xmlDNFilename;
 	bool ifNeutronsInDecay = false;
 	
@@ -89,17 +111,19 @@ int main(int argc,char** argv){
 //		throw IOException("Warning message: The file " + (string) ensDecayFilename + " is not open!");
 		cout << "Warning message (first): The file " + (string) ensDecayFilename + " is not open!" << endl;
 	
-	string decayInfoSummaryFilename = ensDecayFilename + "_summary";
+	string decayInfoSummaryFilename = RemoveExtension(ensDecayFilename) + "_summary.txt";
 		
 	ofstream outSummary(decayInfoSummaryFilename.c_str());
 	if (!outSummary.is_open())
 //		throw IOException("Warning message: The file " + (string) decayInfoSummaryFilename + " is not open!");
 		cout << "Warning message: The file " + (string) decayInfoSummaryFilename + " is not open!" << endl;
-			
-//	ofstream outAdditional(additionalFilename.c_str());
-//	if (!outAdditional.is_open())
+	
+	string additionalFilename = RemoveExtension(ensDecayFilename) + "_additional.txt";
+	
+	ofstream outAdditional(additionalFilename.c_str());
+	if (!outAdditional.is_open())
 //		throw IOException("Warning message: The file " + (string) additionalFilename + " is not open!");
-//		cout << "Warning message: The file " + (string) additionalFilename + " is not open!" << endl;
+		cout << "Warning message: The file " + (string) additionalFilename + " is not open!" << endl;
 	
 	string data, buff, stringParity;
 	getline(inDecay, buff); //first line - some information about decay
@@ -136,7 +160,13 @@ int main(int argc,char** argv){
 			if(buff[7]=='B' && buff[5]==' ' && buff[6]==' ')
 			{
 				data = buff.substr(21, 8);
-				double betaIntensity = string2num <double>(data, std::dec);
+				betaIntensity = string2num <double>(data, std::dec);
+				totalBetaIntensity += betaIntensity;
+			}
+			if(buff[7]=='E' && buff[5]==' ' && buff[6]==' ')
+			{
+				data = buff.substr(21, 8);
+				betaIntensity = string2num <double>(data, std::dec);
 				totalBetaIntensity += betaIntensity;
 			}
 			if(buff[7]=='L' && buff[5]==' ' && buff[6]==' ') //each level
@@ -169,6 +199,8 @@ int main(int argc,char** argv){
 	int gammaIntensityPointer(-1);
 	unlockGamma = false;
 	
+	outAdditional << "#Energy betaIntensity" << endl;
+	
 	while (!inDecay.eof())
 	{
 		getline(inDecay, buff);
@@ -195,11 +227,14 @@ int main(int argc,char** argv){
 				
 				
 				nodeLevelM = nodeNuclideM.append_child("Level");
-				nodeLevelM.append_attribute("Energy") = energy;
+				nodeLevelM.append_attribute("Energy").set_value(toStringPrecision(energy,2).c_str());;
 				nodeLevelM.append_attribute("Spin"); // to do in the future
 				nodeLevelM.append_attribute("Parity"); // to do in the future
-				nodeLevelM.append_attribute("HalfLifeTime") = T12;
+				nodeLevelM.append_attribute("HalfLifeTime").set_value(toStringPrecision(T12,2).c_str());
 				nodeLevelM.append_attribute("TimeUnit") = timeUnit.c_str();
+				
+				T12 = 0.; //apparently that variable can have the same address in further code
+				// as other double T12 so it needs to be zeroed here
 				
 				data=buff.substr(64,10);
 				qVal_ = string2num <double>(data, std::dec);
@@ -235,11 +270,14 @@ int main(int argc,char** argv){
 				maxBetaEnergy = qVal_ - energyLevel;
 				
 				nodeLevelD = nodeNuclideD.append_child("Level");
-				nodeLevelD.append_attribute("Energy") = energyLevel;
+				nodeLevelD.append_attribute("Energy").set_value(toStringPrecision(energyLevel,2).c_str());;
 				nodeLevelD.append_attribute("Spin"); // to do in the future
 				nodeLevelD.append_attribute("Parity"); // to do in the future
-				nodeLevelD.append_attribute("HalfLifeTime") = T12;
-				nodeLevelD.append_attribute("TimeUnit") = timeUnit.c_str();		
+				nodeLevelD.append_attribute("HalfLifeTime").set_value(toStringPrecision(T12,2).c_str());;
+				nodeLevelD.append_attribute("TimeUnit") = timeUnit.c_str();	
+				
+				T12 = 0.; //apparently that variable can have the same address in further code
+				// as other double T12 so it needs to be zeroed here	
 			}
 			
 			if(buff[7]=='B' && buff[5]==' ' && buff[6]==' ')
@@ -247,7 +285,7 @@ int main(int argc,char** argv){
 				whichBeta = -1;
 				
 				data = buff.substr(21, 8);
-				double betaIntensity = string2num <double>(data, std::dec);
+				betaIntensity = string2num <double>(data, std::dec);
 				betaIntensity *= 100. / totalBetaIntensity;
 				normalizedTotalBetaIntensity += betaIntensity; //just to check if it is 100 at the end
 				
@@ -267,39 +305,60 @@ int main(int argc,char** argv){
 				
 				pugi::xml_node nodeTransition = nodeLevelM.append_child("Transition");
 				nodeTransition.append_attribute("Type") = "B-";
+				nodeTransition.append_attribute("TransitionQValue").set_value(toStringPrecision(maxBetaEnergy,2).c_str());
+				nodeTransition.append_attribute("Intensity").set_value(toStringPrecision(betaIntensity,4).c_str());
+				
+				pugi::xml_node nodeTargetLevel = nodeTransition.append_child("TargetLevel");
+				nodeTargetLevel.append_attribute("Energy").set_value(toStringPrecision(energyLevel,2).c_str());
+				nodeTargetLevel.append_attribute("AtomicNumber") = atomicNumber;
+				nodeTargetLevel.append_attribute("AtomicMass") = atomicMass;
+				
+				averageGammaEnergy += energyLevel*betaIntensity/(100-g_delayedNeutronPercentage*100);
+				
+				FermiDistribution* fermiDist = new FermiDistribution(atomicNumber + whichBeta, maxBetaEnergy, whichBeta);
+				double averageLvlBetaEnergy = fermiDist->GetAverageBetaEnergy();
+				averageBetaEnergy += betaIntensity*averageLvlBetaEnergy/100.;
+				
+				//outAdditional << logft << endl;
+				outAdditional << energyLevel << " " << betaIntensity << endl;
+				//outAdditional << energyLevel << " " << betaIntensityUnderSn + betaIntensityAboveSn << endl;
+			}
+			/*
+			if(buff[7]=='E'&& buff[5]==' ' && buff[6]==' ')
+			{
+				whichBeta = +1;
+				
+				data = buff.substr(21, 8);
+				double betaPlusIntensity = string2num <double>(data, std::dec);
+				// Calculation and normalization of beta intensity doesnt work for B+ - Why??
+				betaIntensity *= 100. / totalBetaIntensity;
+				normalizedTotalBetaIntensity += betaIntensity; //just to check if it is 100 at the end
+				
+				data=buff.substr(31,8);
+				double ECIntensity= string2num <double>(data, std::dec);
+				data=buff.substr(64,10);
+				//double totalIntensity = string2num <double>(data, std::dec);
+				
+				pugi::xml_node nodeTransition = nodeLevelM.append_child("Transition");
+				nodeTransition.append_attribute("Type") = "B+";
 				nodeTransition.append_attribute("TransitionQValue") = maxBetaEnergy;
-				nodeTransition.append_attribute("Intensity") = betaIntensity;
+				nodeTransition.append_attribute("Intensity") = betaPlusIntensity+ECIntensity;
+				nodeTransition.append_attribute("ElectronConversionCoefficient") = ECIntensity;
 				
 				pugi::xml_node nodeTargetLevel = nodeTransition.append_child("TargetLevel");
 				nodeTargetLevel.append_attribute("Energy") = energyLevel;
 				nodeTargetLevel.append_attribute("AtomicNumber") = atomicNumber;
 				nodeTargetLevel.append_attribute("AtomicMass") = atomicMass;
-
-			}
-			/*
-			if(buff[7]=='E'&& buff[5]==' ' && buff[6]==' ' && levels_.size() > 0)
-			{
-				
-				data = buff.substr(21, 8);
-				double betaPlusIntensity = string2num <double>(data, std::dec);
-				data=buff.substr(31,8);
-				double ECIntensity= string2num <double>(data, std::dec);
-				data=buff.substr(64,10);
-				//double totalIntensity = string2num <double>(data, std::dec);
-				(*(levels_.end() - 1))->SetBetaFeedingFunction(betaPlusIntensity+ECIntensity);
-				(*(levels_.end() - 1))->SetBetaPlus(betaPlusIntensity, ECIntensity);
-				//data=buff.substr(41,8);
-				//double betaLogft = string2num <double>(data, std::dec);
-				//(*(levels_.end() - 1))->SetBetaLogft(betaLogft);
-
 		
 			}
 			
 			if(buff[7]=='E'&& (buff[5]=='S'||buff[5]=='2') && buff[6]==' ')
 			{
-				data = buff.substr(9, 3);
-				if (data == "CK=")
-				{
+				//data = buff.substr(9, 3);
+				//if (data == "CK=")
+				//{
+					pugi::xml_node nodeTransition = nodeLevelM.last_child();
+					
 					data = buff.substr(9, 74); //all line
 					stringstream ss;
 					ss << data;
@@ -315,14 +374,35 @@ int main(int argc,char** argv){
 						double value;
 						getline(sss, type, '=');
 						sss >> value;
-						(*(levels_.end() - 1))->GetBeta()->SetECCoef(type, value);
+						
+						if(type.back() == '+') type.pop_back();
+						
+						if(type == "EAV") continue;
+						
+						double eCC = nodeTransition.attribute("ElectronConversionCoefficient").as_double();
+						//ensdf format may be a reason to write some data 2 times, e.g. NC=
+						pugi::xml_attribute checkDoubles = nodeTransition.last_attribute();
+						if( checkDoubles.name() == type )
+						{
+							eCC -= checkDoubles.as_double();
+							checkDoubles.set_value(value);
+						}
+						else
+							nodeTransition.append_attribute(type.c_str()) = value;
+							
+						if(eCC == 0. || eccAuxiliaryIndicator)
+						{
+							eccAuxiliaryIndicator = true;
+							eCC += value;
+							nodeTransition.attribute("ElectronConversionCoefficient").set_value(eCC);
+						}
 					}
-
-				}
+				//}
 			}	*/
 			
 				if(buff[7]=='G' && buff[5]==' ' && buff[6]==' ' && unlockGamma)
 				{
+					
 					data = buff.substr(9, 10);
 					double gammaEnergy = string2num <double>(data, std::dec);
 					data = buff.substr(21, 8);
@@ -340,15 +420,19 @@ int main(int argc,char** argv){
 
 					pugi::xml_node nodeTransition = nodeLevelD.append_child("Transition");
 					nodeTransition.append_attribute("Type") = "G";
-					nodeTransition.append_attribute("TransitionQValue") = gammaEnergy;
-					nodeTransition.append_attribute("Intensity") = gammaIntensity;	
-					nodeTransition.append_attribute("ElectronConversionCoefficient") = electronConversionCoefficient;	
+					nodeTransition.append_attribute("TransitionQValue").set_value(toStringPrecision(gammaEnergy,2).c_str());
+					nodeTransition.append_attribute("Intensity").set_value(toStringPrecision(gammaIntensity,4).c_str());
+					if(electronConversionCoefficient != 0)
+					{
+						pugi::xml_node nodeConversion = nodeTransition.append_child("ElectronConversionCoefficient");
+						nodeConversion.append_attribute("Total") = electronConversionCoefficient;
+					}
 					
 					pugi::xml_node nodeTargetLevel = nodeTransition.append_child("TargetLevel");
-					nodeTargetLevel.append_attribute("Energy") = energyLevel - gammaEnergy;
+					nodeTargetLevel.append_attribute("Energy").set_value(toStringPrecision(energyLevel - gammaEnergy,2).c_str());
 					nodeTargetLevel.append_attribute("AtomicNumber") = atomicNumber;
 					nodeTargetLevel.append_attribute("AtomicMass") = atomicMass;
-					
+										
 					//data = buff.substr(31,10);			
 					//(*(gamma.end() - 1))->SetGammaMultiplicity(data);
 
@@ -358,9 +442,15 @@ int main(int argc,char** argv){
 			if (buff[7] == 'G' && (buff[5] == 'S' || buff[5] == '2') && buff[6] == ' ') //electron conversion
 			{
 				data = buff.substr(9, 3);
+				//cout << data << endl;
+				//bool testKC = data == "KC=";
+				//bool testNC = data == "NC=";
 				if (data == "KC=" || "NC=")
 				{
+					//cout << testKC << " weszlo " << testNC << endl;
 					pugi::xml_node nodeTransition = nodeLevelD.last_child();
+					pugi::xml_node nodeConversion = nodeTransition.child("ElectronConversionCoefficient");
+					double eCC = nodeConversion.attribute("Total").as_double();
 					
 					data = buff.substr(9, 74); //all line
 					stringstream ss;
@@ -378,16 +468,17 @@ int main(int argc,char** argv){
 						getline(sss, type, '=');
 						sss >> value;
 						
-						string typ1, typ2;
-						typ1 = type[0];
-						typ2 = type[1];
-						string typ = typ1 + typ2; // type without '+'
+						if(type.back() == '+') type.pop_back(); // type without '+'
 						
-						nodeTransition.append_attribute(typ.c_str()) = value;
-						//nodeTransition.append_attribute("shellElectronConvCoefType") = type;
-						//(*(gamma.end() - 1))->SetShellElectronConvCoef(type, value);
+						//ensdf format may be a reason to write some data 2 times, e.g. NC=
+						pugi::xml_attribute checkDoubles = nodeConversion.last_attribute();
+						if( checkDoubles.name() == type )
+						{
+							checkDoubles.set_value(value);
+						}
+						else
+							nodeConversion.append_attribute(type.c_str()) = value;
 					}
-
 				}
 			}			
 		}
@@ -397,11 +488,9 @@ int main(int argc,char** argv){
 	outSummary << "normalizedTotalBetaIntensity: " << normalizedTotalBetaIntensity << endl;
 	
 	string atomicNameMother;
-	if(whichBeta == -1){
-		nodeNuclideM.append_attribute("AtomicNumber") = atomicNumber - 1;
-		nodeNuclideM.append_attribute("AtomicMass") = atomicMass;
-		atomicNameMother = PeriodicTable::GetAtomicNameCap(atomicNumber - 1);
-	}
+	nodeNuclideM.append_attribute("AtomicNumber") = atomicNumber + whichBeta;
+	nodeNuclideM.append_attribute("AtomicMass") = atomicMass;
+	atomicNameMother = PeriodicTable::GetAtomicNameCap(atomicNumber + whichBeta);
 					
 	if(ifNeutronsInDecay){
 		int atomicNumberN(0), atomicMassN(0); //neutrons emmiter
@@ -499,7 +588,7 @@ int main(int argc,char** argv){
 					iss >> timeUnit;*/
 					
 					nodeLevelDN = nodeNuclideDN.append_child("Level");
-					nodeLevelDN.append_attribute("Energy") = energyLevel;
+					nodeLevelDN.append_attribute("Energy").set_value(toStringPrecision(energyLevel,2).c_str());
 					nodeLevelDN.append_attribute("Spin"); // to do in the future
 					nodeLevelDN.append_attribute("Parity"); // to do in the future
 					nodeLevelDN.append_attribute("HalfLifeTime");
@@ -521,7 +610,7 @@ int main(int argc,char** argv){
 					normalizedTotalNeutronIntensity += neutronIntensity;
 					
 					nodeLevelD = nodeNuclideD.append_child("Level");
-					nodeLevelD.append_attribute("Energy") = neutronEnergyLevel;
+					nodeLevelD.append_attribute("Energy").set_value(toStringPrecision(neutronEnergyLevel,2).c_str());
 					nodeLevelD.append_attribute("Spin"); // to do in the future
 					nodeLevelD.append_attribute("Parity"); // to do in the future
 					nodeLevelD.append_attribute("HalfLifeTime");
@@ -529,23 +618,31 @@ int main(int argc,char** argv){
 					
 					pugi::xml_node nodeTransition = nodeLevelD.append_child("Transition");
 					nodeTransition.append_attribute("Type") = "N";
-					nodeTransition.append_attribute("TransitionQValue") = neutronEnergy;
-					nodeTransition.append_attribute("Intensity") = neutronIntensity;
+					nodeTransition.append_attribute("TransitionQValue").set_value(toStringPrecision(neutronEnergy,2).c_str());
+					nodeTransition.append_attribute("Intensity").set_value(toStringPrecision(neutronIntensity,4).c_str());
 					
 					pugi::xml_node nodeTargetLevel = nodeTransition.append_child("TargetLevel");
-					nodeTargetLevel.append_attribute("Energy") = energyLevel;
+					nodeTargetLevel.append_attribute("Energy").set_value(toStringPrecision(energyLevel,2).c_str());
 					nodeTargetLevel.append_attribute("AtomicNumber") = atomicNumberN;
 					nodeTargetLevel.append_attribute("AtomicMass") = atomicMassN;
 					
 					nodeTransition = nodeLevelM.append_child("Transition");
 					nodeTransition.append_attribute("Type") = "B-";
-					nodeTransition.append_attribute("TransitionQValue") = maxBetaEnergy;
-					nodeTransition.append_attribute("Intensity") = neutronIntensity;
+					nodeTransition.append_attribute("TransitionQValue").set_value(toStringPrecision(maxBetaEnergy,2).c_str());
+					nodeTransition.append_attribute("Intensity").set_value(toStringPrecision(neutronIntensity,4).c_str());
 					
 					nodeTargetLevel = nodeTransition.append_child("TargetLevel");
-					nodeTargetLevel.append_attribute("Energy") = neutronEnergyLevel;
+					nodeTargetLevel.append_attribute("Energy").set_value(toStringPrecision(neutronEnergyLevel,2).c_str());
 					nodeTargetLevel.append_attribute("AtomicNumber") = atomicNumber;
 					nodeTargetLevel.append_attribute("AtomicMass") = atomicMass;
+					
+					FermiDistribution* fermiDist = new FermiDistribution(atomicNumber + whichBeta, maxBetaEnergy, whichBeta);
+					double averageLvlBetaEnergy = fermiDist->GetAverageBetaEnergy();
+					averageBetaEnergy += neutronIntensity*averageLvlBetaEnergy/100.;
+					
+					outAdditional << neutronEnergyLevel << " " << neutronIntensity << endl;
+					//outAdditional << "/gun/energy " << neutronEnergy << " keV" << endl;
+					//outAdditional << "/run/beamOn " << floor(neutronIntensity*1000000) << endl;
 				}
 			}
 		}
@@ -576,7 +673,11 @@ int main(int argc,char** argv){
 	outSummary << "beta-gamma intensity bigger than Sn: " << betaIntensityAboveSn << endl;
 	outSummary << "summed: " << betaIntensityAboveSn + betaIntensityUnderSn << endl;
 	outSummary << "ratio in percents (including delayed neutrons levels): " << betaIntensityAboveSn * (1. - g_delayedNeutronPercentage) << endl;
+	outSummary << "Average gamma intensity: " << averageGammaEnergy << endl;
+	outSummary << "Average beta intensity: " << averageBetaEnergy << endl;
 	outSummary.close();
+	
+	outAdditional.close();
 
 return 0;
 }
