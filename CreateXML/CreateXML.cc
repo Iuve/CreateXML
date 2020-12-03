@@ -11,7 +11,7 @@
 #include <iomanip>
 
 const double g_delayedNeutronPercentage(2.8 / 100.);
-const double g_SnEnergy = 5515.;
+const double g_SnEnergy = 5515.17;
 
 using namespace std;
 
@@ -232,6 +232,7 @@ int main(int argc,char** argv){
 				nodeLevelM.append_attribute("Parity"); // to do in the future
 				nodeLevelM.append_attribute("HalfLifeTime").set_value(toStringPrecision(T12,2).c_str());
 				nodeLevelM.append_attribute("TimeUnit") = timeUnit.c_str();
+				nodeLevelM.append_attribute("Origin") = "Database";
 				
 				T12 = 0.; //apparently that variable can have the same address in further code
 				// as other double T12 so it needs to be zeroed here
@@ -275,6 +276,7 @@ int main(int argc,char** argv){
 				nodeLevelD.append_attribute("Parity"); // to do in the future
 				nodeLevelD.append_attribute("HalfLifeTime").set_value(toStringPrecision(T12,2).c_str());;
 				nodeLevelD.append_attribute("TimeUnit") = timeUnit.c_str();	
+				nodeLevelD.append_attribute("Origin") = "Database";
 				
 				T12 = 0.; //apparently that variable can have the same address in further code
 				// as other double T12 so it needs to be zeroed here	
@@ -306,7 +308,8 @@ int main(int argc,char** argv){
 				pugi::xml_node nodeTransition = nodeLevelM.append_child("Transition");
 				nodeTransition.append_attribute("Type") = "B-";
 				nodeTransition.append_attribute("TransitionQValue").set_value(toStringPrecision(maxBetaEnergy,2).c_str());
-				nodeTransition.append_attribute("Intensity").set_value(toStringPrecision(betaIntensity,4).c_str());
+				nodeTransition.append_attribute("Intensity").set_value(toStringPrecision(betaIntensity,6).c_str());
+				nodeTransition.append_attribute("Origin") = "Database";
 				
 				pugi::xml_node nodeTargetLevel = nodeTransition.append_child("TargetLevel");
 				nodeTargetLevel.append_attribute("Energy").set_value(toStringPrecision(energyLevel,2).c_str());
@@ -421,7 +424,8 @@ int main(int argc,char** argv){
 					pugi::xml_node nodeTransition = nodeLevelD.append_child("Transition");
 					nodeTransition.append_attribute("Type") = "G";
 					nodeTransition.append_attribute("TransitionQValue").set_value(toStringPrecision(gammaEnergy,2).c_str());
-					nodeTransition.append_attribute("Intensity").set_value(toStringPrecision(gammaIntensity,4).c_str());
+					nodeTransition.append_attribute("Intensity").set_value(toStringPrecision(gammaIntensity,6).c_str());
+					nodeTransition.append_attribute("Origin") = "Database";
 					if(electronConversionCoefficient != 0)
 					{
 						pugi::xml_node nodeConversion = nodeTransition.append_child("ElectronConversionCoefficient");
@@ -592,7 +596,8 @@ int main(int argc,char** argv){
 					nodeLevelDN.append_attribute("Spin"); // to do in the future
 					nodeLevelDN.append_attribute("Parity"); // to do in the future
 					nodeLevelDN.append_attribute("HalfLifeTime");
-					nodeLevelDN.append_attribute("TimeUnit");			
+					nodeLevelDN.append_attribute("TimeUnit");
+					nodeLevelDN.append_attribute("Origin") = "Database";
 				}
 				
 				if(buff[7]=='D' && buff[8]=='N' && buff[5]==' ' && buff[6]==' '){
@@ -615,11 +620,13 @@ int main(int argc,char** argv){
 					nodeLevelD.append_attribute("Parity"); // to do in the future
 					nodeLevelD.append_attribute("HalfLifeTime");
 					nodeLevelD.append_attribute("TimeUnit");
+					nodeLevelD.append_attribute("Origin") = "Database";
 					
 					pugi::xml_node nodeTransition = nodeLevelD.append_child("Transition");
 					nodeTransition.append_attribute("Type") = "N";
 					nodeTransition.append_attribute("TransitionQValue").set_value(toStringPrecision(neutronEnergy,2).c_str());
-					nodeTransition.append_attribute("Intensity").set_value(toStringPrecision(neutronIntensity,4).c_str());
+					nodeTransition.append_attribute("Intensity").set_value(toStringPrecision(neutronIntensity,6).c_str());
+					nodeTransition.append_attribute("Origin") = "Database";
 					
 					pugi::xml_node nodeTargetLevel = nodeTransition.append_child("TargetLevel");
 					nodeTargetLevel.append_attribute("Energy").set_value(toStringPrecision(energyLevel,2).c_str());
@@ -629,7 +636,8 @@ int main(int argc,char** argv){
 					nodeTransition = nodeLevelM.append_child("Transition");
 					nodeTransition.append_attribute("Type") = "B-";
 					nodeTransition.append_attribute("TransitionQValue").set_value(toStringPrecision(maxBetaEnergy,2).c_str());
-					nodeTransition.append_attribute("Intensity").set_value(toStringPrecision(neutronIntensity,4).c_str());
+					nodeTransition.append_attribute("Intensity").set_value(toStringPrecision(neutronIntensity,6).c_str());
+					nodeTransition.append_attribute("Origin") = "Database";
 					
 					nodeTargetLevel = nodeTransition.append_child("TargetLevel");
 					nodeTargetLevel.append_attribute("Energy").set_value(toStringPrecision(neutronEnergyLevel,2).c_str());
