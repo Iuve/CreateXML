@@ -168,6 +168,9 @@ int main(int argc,char** argv){
 				data = buff.substr(21, 8);
 				betaIntensity = string2num <double>(data, std::dec);
 				totalBetaIntensity += betaIntensity;
+				data = buff.substr(31,8);
+				double ECIntensity = string2num <double>(data, std::dec);
+				totalBetaIntensity += ECIntensity;
 			}
 			if(buff[7]=='L' && buff[5]==' ' && buff[6]==' ') //each level
 			{				
@@ -326,32 +329,55 @@ int main(int argc,char** argv){
 				outAdditional << energyLevel << " " << betaIntensity << endl;
 				//outAdditional << energyLevel << " " << betaIntensityUnderSn + betaIntensityAboveSn << endl;
 			}
-			/*
+			
 			if(buff[7]=='E'&& buff[5]==' ' && buff[6]==' ')
 			{
 				whichBeta = +1;
 				
 				data = buff.substr(21, 8);
 				double betaPlusIntensity = string2num <double>(data, std::dec);
-				// Calculation and normalization of beta intensity doesnt work for B+ - Why??
-				betaIntensity *= 100. / totalBetaIntensity;
-				normalizedTotalBetaIntensity += betaIntensity; //just to check if it is 100 at the end
-				
 				data=buff.substr(31,8);
-				double ECIntensity= string2num <double>(data, std::dec);
+				double ECIntensity = string2num <double>(data, std::dec);
+				
+				betaPlusIntensity *= 100. / totalBetaIntensity;
+				ECIntensity *= 100. / totalBetaIntensity;
+				
+				normalizedTotalBetaIntensity += betaPlusIntensity; //just to check if it is 100 at the end
+				normalizedTotalBetaIntensity += ECIntensity; //just to check if it is 100 at the end
+					
 				data=buff.substr(64,10);
 				//double totalIntensity = string2num <double>(data, std::dec);
 				
 				pugi::xml_node nodeTransition = nodeLevelM.append_child("Transition");
 				nodeTransition.append_attribute("Type") = "B+";
-				nodeTransition.append_attribute("TransitionQValue") = maxBetaEnergy;
-				nodeTransition.append_attribute("Intensity") = betaPlusIntensity+ECIntensity;
-				nodeTransition.append_attribute("ElectronConversionCoefficient") = ECIntensity;
+				nodeTransition.append_attribute("TransitionQValue").set_value(toStringPrecision(maxBetaEnergy - 1022.,2).c_str());
+				nodeTransition.append_attribute("Intensity").set_value(toStringPrecision(betaPlusIntensity,6).c_str());
+				nodeTransition.append_attribute("Origin") = "Database";		
 				
 				pugi::xml_node nodeTargetLevel = nodeTransition.append_child("TargetLevel");
-				nodeTargetLevel.append_attribute("Energy") = energyLevel;
+				nodeTargetLevel.append_attribute("Energy").set_value(toStringPrecision(energyLevel,2).c_str());
 				nodeTargetLevel.append_attribute("AtomicNumber") = atomicNumber;
 				nodeTargetLevel.append_attribute("AtomicMass") = atomicMass;
+				
+				//FermiDistribution* fermiDist = new FermiDistribution(atomicNumber + whichBeta, maxBetaEnergy, whichBeta);
+				//double averageLvlBetaEnergy = fermiDist->GetAverageBetaEnergy();
+				//averageBetaEnergy += betaIntensity*averageLvlBetaEnergy/100.;
+				
+				if(ECIntensity != 0)
+				{
+					pugi::xml_node nodeTransition = nodeLevelM.append_child("Transition");
+					nodeTransition.append_attribute("Type") = "EC";
+					nodeTransition.append_attribute("TransitionQValue").set_value(toStringPrecision(maxBetaEnergy,2).c_str());
+					nodeTransition.append_attribute("Intensity").set_value(toStringPrecision(ECIntensity,6).c_str());
+					nodeTransition.append_attribute("Origin") = "Database";	
+					
+					pugi::xml_node nodeConversion = nodeTransition.append_child("ElectronCapture");
+					
+					pugi::xml_node nodeTargetLevel = nodeTransition.append_child("TargetLevel");
+					nodeTargetLevel.append_attribute("Energy").set_value(toStringPrecision(energyLevel,2).c_str());
+					nodeTargetLevel.append_attribute("AtomicNumber") = atomicNumber;
+					nodeTargetLevel.append_attribute("AtomicMass") = atomicMass;
+				}
 		
 			}
 			
@@ -360,7 +386,10 @@ int main(int argc,char** argv){
 				//data = buff.substr(9, 3);
 				//if (data == "CK=")
 				//{
-					pugi::xml_node nodeTransition = nodeLevelM.last_child();
+				pugi::xml_node nodeTransition = nodeLevelM.last_child();
+				if( !nodeTransition.child("ElectronCapture").empty() )
+				{
+					pugi::xml_node nodeCapture = nodeTransition.child("ElectronCapture");
 					
 					data = buff.substr(9, 74); //all line
 					stringstream ss;
@@ -382,26 +411,28 @@ int main(int argc,char** argv){
 						
 						if(type == "EAV") continue;
 						
-						double eCC = nodeTransition.attribute("ElectronConversionCoefficient").as_double();
+						//double eCC = nodeTransition.attribute("ElectronConversionCoefficient").as_double();
 						//ensdf format may be a reason to write some data 2 times, e.g. NC=
-						pugi::xml_attribute checkDoubles = nodeTransition.last_attribute();
+						pugi::xml_attribute checkDoubles = nodeCapture.last_attribute();
 						if( checkDoubles.name() == type )
 						{
-							eCC -= checkDoubles.as_double();
+							//eCC -= checkDoubles.as_double();
 							checkDoubles.set_value(value);
 						}
 						else
-							nodeTransition.append_attribute(type.c_str()) = value;
+							nodeCapture.append_attribute(type.c_str()) = value;
 							
+						/*
 						if(eCC == 0. || eccAuxiliaryIndicator)
 						{
 							eccAuxiliaryIndicator = true;
 							eCC += value;
 							nodeTransition.attribute("ElectronConversionCoefficient").set_value(eCC);
 						}
+						*/
 					}
-				//}
-			}	*/
+				}
+			}	
 			
 				if(buff[7]=='G' && buff[5]==' ' && buff[6]==' ' && unlockGamma)
 				{
@@ -449,12 +480,17 @@ int main(int argc,char** argv){
 				//cout << data << endl;
 				//bool testKC = data == "KC=";
 				//bool testNC = data == "NC=";
-				if (data == "KC=" || "NC=")
+				if (data == "KC=" || "NC=" || "CC=")
 				{
-					//cout << testKC << " weszlo " << testNC << endl;
 					pugi::xml_node nodeTransition = nodeLevelD.last_child();
-					pugi::xml_node nodeConversion = nodeTransition.child("ElectronConversionCoefficient");
-					double eCC = nodeConversion.attribute("Total").as_double();
+					pugi::xml_node nodeConversion;
+					
+					if(data == "CC=")
+						nodeConversion = nodeTransition.append_child("ElectronConversionCoefficient");
+					else
+						nodeConversion = nodeTransition.child("ElectronConversionCoefficient");
+						
+					//double eCC = nodeConversion.attribute("Total").as_double();
 					
 					data = buff.substr(9, 74); //all line
 					stringstream ss;
@@ -473,6 +509,7 @@ int main(int argc,char** argv){
 						sss >> value;
 						
 						if(type.back() == '+') type.pop_back(); // type without '+'
+						if(type == "CC") type = "Total";
 						
 						//ensdf format may be a reason to write some data 2 times, e.g. NC=
 						pugi::xml_attribute checkDoubles = nodeConversion.last_attribute();
