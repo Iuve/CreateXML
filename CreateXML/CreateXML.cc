@@ -342,22 +342,27 @@ int main(int argc,char** argv){
 				betaPlusIntensity *= 100. / totalBetaIntensity;
 				ECIntensity *= 100. / totalBetaIntensity;
 				
-				normalizedTotalBetaIntensity += betaPlusIntensity; //just to check if it is 100 at the end
+				if(betaPlusIntensity != 0)
+					normalizedTotalBetaIntensity += betaPlusIntensity; //just to check if it is 100 at the end
 				normalizedTotalBetaIntensity += ECIntensity; //just to check if it is 100 at the end
 					
 				data=buff.substr(64,10);
 				//double totalIntensity = string2num <double>(data, std::dec);
 				
-				pugi::xml_node nodeTransition = nodeLevelM.append_child("Transition");
-				nodeTransition.append_attribute("Type") = "B+";
-				nodeTransition.append_attribute("TransitionQValue").set_value(toStringPrecision(maxBetaEnergy - 1022.,2).c_str());
-				nodeTransition.append_attribute("Intensity").set_value(toStringPrecision(betaPlusIntensity,6).c_str());
-				nodeTransition.append_attribute("Origin") = "Database";		
-				
-				pugi::xml_node nodeTargetLevel = nodeTransition.append_child("TargetLevel");
-				nodeTargetLevel.append_attribute("Energy").set_value(toStringPrecision(energyLevel,2).c_str());
-				nodeTargetLevel.append_attribute("AtomicNumber") = atomicNumber;
-				nodeTargetLevel.append_attribute("AtomicMass") = atomicMass;
+				if(betaPlusIntensity != 0)
+				{
+					pugi::xml_node nodeTransition = nodeLevelM.append_child("Transition");
+					nodeTransition.append_attribute("Type") = "B+";
+					nodeTransition.append_attribute("TransitionQValue").set_value(toStringPrecision(maxBetaEnergy - 1022.,2).c_str());
+					//nodeTransition.append_attribute("TransitionQValue").set_value(toStringPrecision(maxBetaEnergy,2).c_str());
+					nodeTransition.append_attribute("Intensity").set_value(toStringPrecision(betaPlusIntensity,6).c_str());
+					nodeTransition.append_attribute("Origin") = "Database";		
+					
+					pugi::xml_node nodeTargetLevel = nodeTransition.append_child("TargetLevel");
+					nodeTargetLevel.append_attribute("Energy").set_value(toStringPrecision(energyLevel,2).c_str());
+					nodeTargetLevel.append_attribute("AtomicNumber") = atomicNumber;
+					nodeTargetLevel.append_attribute("AtomicMass") = atomicMass;
+				}
 				
 				//FermiDistribution* fermiDist = new FermiDistribution(atomicNumber + whichBeta, maxBetaEnergy, whichBeta);
 				//double averageLvlBetaEnergy = fermiDist->GetAverageBetaEnergy();
@@ -480,7 +485,7 @@ int main(int argc,char** argv){
 				//cout << data << endl;
 				//bool testKC = data == "KC=";
 				//bool testNC = data == "NC=";
-				if (data == "KC=" || "NC=" || "CC=")
+				if (data == "KC=" || data == "NC=" || data == "CC=")
 				{
 					pugi::xml_node nodeTransition = nodeLevelD.last_child();
 					pugi::xml_node nodeConversion;
