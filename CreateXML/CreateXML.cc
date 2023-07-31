@@ -9,9 +9,10 @@
 #include <sstream>
 #include <cmath>
 #include <iomanip>
+#include <algorithm>
 
-const double g_delayedNeutronPercentage(2.8 / 100.);
-const double g_SnEnergy = 5515.17;
+const double g_delayedNeutronPercentage(6.58 / 100.);
+const double g_SnEnergy = 7053.;
 
 using namespace std;
 
@@ -217,10 +218,12 @@ int main(int argc,char** argv){
 				data=buff.substr(9,10);
 				double energy = string2num <double>(data, std::dec);
 								
-				//data=buff.substr(21,18); 
+				stringParity=buff.substr(21,18); 
+				stringParity.erase(remove(stringParity.begin(), stringParity.end(), 
+				' '), stringParity.end());
 				//parentLevel_->SetSpinAndParity(data);
 				
-				data=buff.substr(39,9);
+				data=buff.substr(39,10);
 				istringstream iss(data);
 				double T12;
 				iss >> T12;
@@ -228,12 +231,20 @@ int main(int argc,char** argv){
 				string timeUnit;
 				iss >> timeUnit;
 				
+				//T12 uncertainty
+				data=buff.substr(49,6);
+				double dT12 = string2num <double>(data, std::dec);
+				
 				
 				nodeLevelM = nodeNuclideM.append_child("Level");
 				nodeLevelM.append_attribute("Energy").set_value(toStringPrecision(energy,2).c_str());;
 				nodeLevelM.append_attribute("Spin"); // to do in the future
 				nodeLevelM.append_attribute("Parity"); // to do in the future
+				if(!stringParity.empty())
+					nodeLevelM.append_attribute("SpinParity") = stringParity.c_str();
 				nodeLevelM.append_attribute("HalfLifeTime").set_value(toStringPrecision(T12,2).c_str());
+				if(dT12 != 0.)
+					nodeLevelM.append_attribute("T12_uncertainty") = dT12;
 				nodeLevelM.append_attribute("TimeUnit") = timeUnit.c_str();
 				nodeLevelM.append_attribute("Origin") = "Database";
 				
@@ -245,7 +256,10 @@ int main(int argc,char** argv){
 				if(qVal_<10)
 					qVal_ = qVal_*1000;
 				qVal_ += energy; //total energy for decay takes parent level en
+				data=buff.substr(74,2);
+				double dqVal_ = string2num <double>(data, std::dec);
 				nodeNuclideM.append_attribute("QBeta") = qVal_;
+				nodeNuclideM.append_attribute("QBeta_uncertainty") = dqVal_;
 				outSummary << "Q val (parent level): " << qVal_ << endl;
 			}
 			
@@ -262,6 +276,10 @@ int main(int argc,char** argv){
 				//energyError = string2num <double>(data, std::dec);
 				
 				//stringParity = buff.substr(21,14);
+				
+				stringParity=buff.substr(21,18);
+				stringParity.erase(remove(stringParity.begin(), stringParity.end(), 
+				' '), stringParity.end()); 
 	
 				data=buff.substr(39,9);
 				istringstream iss(data);
@@ -271,14 +289,22 @@ int main(int argc,char** argv){
 				string timeUnit;
 				iss >> timeUnit;
 				
+				//T12 uncertainty
+				data=buff.substr(49,6);
+				double dT12 = string2num <double>(data, std::dec);
+				
 				maxBetaEnergy = qVal_ - energyLevel;
 				
 				nodeLevelD = nodeNuclideD.append_child("Level");
 				nodeLevelD.append_attribute("Energy").set_value(toStringPrecision(energyLevel,2).c_str());;
 				nodeLevelD.append_attribute("Spin"); // to do in the future
 				nodeLevelD.append_attribute("Parity"); // to do in the future
+				if(!stringParity.empty())
+					nodeLevelD.append_attribute("SpinParity") = stringParity.c_str();
 				nodeLevelD.append_attribute("HalfLifeTime").set_value(toStringPrecision(T12,2).c_str());;
 				nodeLevelD.append_attribute("TimeUnit") = timeUnit.c_str();	
+				if(dT12 != 0.)
+					nodeLevelD.append_attribute("T12_uncertainty") = dT12;
 				nodeLevelD.append_attribute("Origin") = "Database";
 				
 				T12 = 0.; //apparently that variable can have the same address in further code
