@@ -218,10 +218,28 @@ int main(int argc,char** argv){
 				data=buff.substr(9,10);
 				double energy = string2num <double>(data, std::dec);
 								
+				//spin and parity shenanigans
+				double spin;
+				string parity;
 				stringParity=buff.substr(21,18); 
 				stringParity.erase(remove(stringParity.begin(), stringParity.end(), 
 				' '), stringParity.end());
-				//parentLevel_->SetSpinAndParity(data);
+				if( (stringParity[0] != '(') && (stringParity.length() <= 4) )
+				{
+					if(stringParity[1] == '/')
+					{
+						double left = int(stringParity[0]) - '0';
+						double right = int(stringParity[2]) - '0';
+						spin = left / right;
+						parity = stringParity[3];
+					}
+					else
+					{
+						spin = int(stringParity[0]) - '0';
+						parity = stringParity[1];
+					}	
+				}
+				
 				
 				data=buff.substr(39,10);
 				istringstream iss(data);
@@ -238,13 +256,21 @@ int main(int argc,char** argv){
 				
 				nodeLevelM = nodeNuclideM.append_child("Level");
 				nodeLevelM.append_attribute("Energy").set_value(toStringPrecision(energy,2).c_str());;
-				nodeLevelM.append_attribute("Spin"); // to do in the future
-				nodeLevelM.append_attribute("Parity"); // to do in the future
+				if( parity == "-" || parity == "+" )
+				{
+					nodeLevelM.append_attribute("Spin") = spin;
+					nodeLevelM.append_attribute("Parity") = parity.c_str();
+				}
+				else
+				{
+					nodeLevelM.append_attribute("Spin");
+					nodeLevelM.append_attribute("Parity");
+				}
 				if(!stringParity.empty())
 					nodeLevelM.append_attribute("SpinParity") = stringParity.c_str();
 				nodeLevelM.append_attribute("HalfLifeTime").set_value(toStringPrecision(T12,2).c_str());
 				if(dT12 != 0.)
-					nodeLevelM.append_attribute("T12_uncertainty") = dT12;
+					nodeLevelM.append_attribute("d_T12") = dT12;
 				nodeLevelM.append_attribute("TimeUnit") = timeUnit.c_str();
 				nodeLevelM.append_attribute("Origin") = "Database";
 				
@@ -259,7 +285,7 @@ int main(int argc,char** argv){
 				data=buff.substr(74,2);
 				double dqVal_ = string2num <double>(data, std::dec);
 				nodeNuclideM.append_attribute("QBeta") = qVal_;
-				nodeNuclideM.append_attribute("QBeta_uncertainty") = dqVal_;
+				nodeNuclideM.append_attribute("d_QBeta") = dqVal_;
 				outSummary << "Q val (parent level): " << qVal_ << endl;
 			}
 			
@@ -271,15 +297,27 @@ int main(int argc,char** argv){
 				data = buff.substr(9, 10);
 				energyLevel = string2num <double>(data, std::dec);
 				
-				//data=buff.substr(21,14);
-				//(*(levels_.end() - 1))->SetLevelSpin(data);
-				//energyError = string2num <double>(data, std::dec);
-				
-				//stringParity = buff.substr(21,14);
-				
+				//spin and parity shenanigans
+				double spin;
+				string parity;
 				stringParity=buff.substr(21,18);
 				stringParity.erase(remove(stringParity.begin(), stringParity.end(), 
 				' '), stringParity.end()); 
+				if( (stringParity[0] != '(') && (stringParity.length() <= 4) )
+				{
+					if(stringParity[1] == '/')
+					{
+						double left = int(stringParity[0]) - '0';
+						double right = int(stringParity[2]) - '0';
+						spin = left / right;
+						parity = stringParity[3];
+					}
+					else
+					{
+						spin = int(stringParity[0]) - '0';
+						parity = stringParity[1];
+					}	
+				}
 	
 				data=buff.substr(39,9);
 				istringstream iss(data);
@@ -297,14 +335,22 @@ int main(int argc,char** argv){
 				
 				nodeLevelD = nodeNuclideD.append_child("Level");
 				nodeLevelD.append_attribute("Energy").set_value(toStringPrecision(energyLevel,2).c_str());;
-				nodeLevelD.append_attribute("Spin"); // to do in the future
-				nodeLevelD.append_attribute("Parity"); // to do in the future
+				if( parity == "-" || parity == "+" )
+				{
+					nodeLevelD.append_attribute("Spin") = spin;
+					nodeLevelD.append_attribute("Parity") = parity.c_str();
+				}
+				else
+				{
+					nodeLevelD.append_attribute("Spin");
+					nodeLevelD.append_attribute("Parity");
+				}
 				if(!stringParity.empty())
 					nodeLevelD.append_attribute("SpinParity") = stringParity.c_str();
 				nodeLevelD.append_attribute("HalfLifeTime").set_value(toStringPrecision(T12,2).c_str());;
 				nodeLevelD.append_attribute("TimeUnit") = timeUnit.c_str();	
 				if(dT12 != 0.)
-					nodeLevelD.append_attribute("T12_uncertainty") = dT12;
+					nodeLevelD.append_attribute("d_T12") = dT12;
 				nodeLevelD.append_attribute("Origin") = "Database";
 				
 				T12 = 0.; //apparently that variable can have the same address in further code
