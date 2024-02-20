@@ -384,6 +384,8 @@ int main(int argc,char** argv){
 				nodeTransition.append_attribute("Type") = "B-";
 				nodeTransition.append_attribute("TransitionQValue").set_value(toStringPrecision(maxBetaEnergy,2).c_str());
 				nodeTransition.append_attribute("Intensity").set_value(toStringPrecision(betaIntensity,6).c_str());
+				if(intensityError != 0.)
+					nodeTransition.append_attribute("d_Intensity") = intensityError;
 				nodeTransition.append_attribute("Origin") = "Database";
 				
 				pugi::xml_node nodeTargetLevel = nodeTransition.append_child("TargetLevel");
@@ -408,6 +410,9 @@ int main(int argc,char** argv){
 				
 				data = buff.substr(21, 8);
 				double betaPlusIntensity = string2num <double>(data, std::dec);
+				data = buff.substr(29,2);
+				double intensityError;
+				intensityError = string2num <double>(data, std::dec);
 				data=buff.substr(31,8);
 				double ECIntensity = string2num <double>(data, std::dec);
 				
@@ -428,6 +433,8 @@ int main(int argc,char** argv){
 					nodeTransition.append_attribute("TransitionQValue").set_value(toStringPrecision(maxBetaEnergy - 1022.,2).c_str());
 					//nodeTransition.append_attribute("TransitionQValue").set_value(toStringPrecision(maxBetaEnergy,2).c_str());
 					nodeTransition.append_attribute("Intensity").set_value(toStringPrecision(betaPlusIntensity,6).c_str());
+					if(intensityError != 0.)
+						nodeTransition.append_attribute("d_Intensity") = intensityError;
 					nodeTransition.append_attribute("Origin") = "Database";		
 					
 					pugi::xml_node nodeTargetLevel = nodeTransition.append_child("TargetLevel");
@@ -519,6 +526,8 @@ int main(int argc,char** argv){
 					data = buff.substr(21, 8);
 					double gammaIntensity = string2num <double>(data, std::dec);
 					data = buff.substr(29, 2);
+					double intensityError;
+						intensityError = string2num <double>(data, std::dec);
 					data = buff.substr(55, 7);
 					double electronConversionCoefficient = string2num <double>(data, std::dec);
 					
@@ -533,6 +542,8 @@ int main(int argc,char** argv){
 					nodeTransition.append_attribute("Type") = "G";
 					nodeTransition.append_attribute("TransitionQValue").set_value(toStringPrecision(gammaEnergy,2).c_str());
 					nodeTransition.append_attribute("Intensity").set_value(toStringPrecision(gammaIntensity,6).c_str());
+					if(intensityError != 0.)
+						nodeTransition.append_attribute("d_Intensity") = intensityError;
 					nodeTransition.append_attribute("Origin") = "Database";
 					if(electronConversionCoefficient != 0)
 					{
